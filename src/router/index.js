@@ -1,22 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ADD from '@/page/ADD'
-import Have from '@/page/Have'
+import routes from './routes'
 
 Vue.use(Router)
 
 export default new Router({
+  routes,
   mode: 'history',
-  routes: [
-    {
-      path: '/ADD',
-      name: 'ADD',
-      component: ADD
-    },
-    {
-      path: '/have',
-      name: 'Have',
-      component: Have
+  fallback: true,
+  // 滚动行为
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {x: 0, y: 0}
     }
-  ]
+  }
 })

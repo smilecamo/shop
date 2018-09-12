@@ -2,86 +2,45 @@
   <div class="add-content">
     <span class="content-header">新增商品</span>
     <Divider dashed />
-    <Form :model="formItem" :label-width="80" width= '320'>
-      <FormItem label="商品名称">
-        <Input v-model="formItem.name" placeholder="请输入商品名称" />
-      </FormItem>
-      <FormItem label="成本价">
-        <Input v-model="formItem.price" placeholder="请输入成本价" />
-      </FormItem>
-      <FormItem label="商品分类">
-        <Select v-model="formItem.sort">
-          <Option value="beijing">New York</Option>
-          <Option value="shanghai">London</Option>
-          <Option value="shenzhen">Sydney</Option>
-      </Select>
-      </FormItem>
-      <FormItem label="商品品牌">
-        <Select v-model="formItem.brand">
-          <Option value="beijing">New York</Option>
-          <Option value="shanghai">London</Option>
-          <Option value="shenzhen">Sydney</Option>
-      </Select>
-      </FormItem>
-      <FormItem label="供应商">
-        <Select v-model="formItem.supplier">
-          <Option value="beijing">New York</Option>
-          <Option value="shanghai">London</Option>
-          <Option value="shenzhen">Sydney</Option>
-      </Select>
-      </FormItem>
-      <FormItem label="商品简介">
-        <Input v-model="formItem.abstract" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..." />
-      </FormItem>
-      <FormItem label="商品详情">
-        <quill-editor
-          class="wen"
-          v-model="content"
-          ref="myQuillEditor"
-          :options="editorOption"
-        >
-        </quill-editor>
-      </FormItem>
-  </Form>
+    <Edit></Edit>
+  <router-view />
   </div>
 </template>
 
 <script>
-import { quillEditor } from 'vue-quill-editor'
+import Edit from '../common/edit/edit'
 export default {
+  // 路由导航
+  // 进入之前
+  beforeRouteEnter (to, from, next) {
+    // ...
+    next(vm => {
+      console.log(vm)
+    })
+  },
+  // 更新的时候
+  beforeUpdate (to, from, next) {
+    // ...
+    next()
+  },
+  // 离开
+  beforeRouteLeave (to, from, next) {
+    this.$Modal.confirm({
+      title: '离开温馨提醒',
+      content: '<p>你确定要离开当前页面</p>',
+      okText: 'OK',
+      cancelText: 'Cancel',
+      onOk: () => {
+        next()
+      }
+    }
+    )
+  },
   components: {
-    quillEditor
+    Edit
   },
   data () {
     return {
-      formItem: {
-        // 商品名称
-        name: '',
-        // 当前价
-        price: '',
-        // 商品分类
-        sort: '',
-        // 商品品牌
-        brand: '',
-        // 供应商
-        supplier: '',
-        // 商品简介
-        abstract: '',
-        // 商品详情
-        details: ''
-      },
-      content: null,
-      editorOption: {
-        modules: {
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike', 'blockquote', 'image', 'clean'],
-            [{'list': 'ordered'}, { 'list': 'bullet' }],
-            [{'indent': '-1'}, { 'indent': '+1' }],
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'size': ['small', false, 'large', 'huge'] }]
-          ]
-        }
-      }
     }
   }
 }

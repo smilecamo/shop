@@ -1,0 +1,46 @@
+import Vue from 'vue'
+import 'iview/dist/styles/iview.css'
+import {
+  Button,
+  Table,
+  Input,
+  RadioGroup,
+  Radio,
+  Select,
+  Option,
+  Form,
+  FormItem,
+  Icon,
+  Message,
+  Page,
+  Spin,
+  Modal,
+  Menu,
+  Submenu,
+  MenuItem,
+  Row,
+  Col,
+  Divider,
+  Upload
+} from 'iview'
+Vue.component('Button', Button)
+Vue.component('Table', Table)
+Vue.component('Input', Input)
+Vue.component('Radio', Radio)
+Vue.component('RadioGroup', RadioGroup)
+Vue.component('Option', Option)
+Vue.component('Select', Select)
+Vue.component('Form', Form)
+Vue.component('FormItem', FormItem)
+Vue.component('Icon', Icon)
+Vue.component('Page', Page)
+Vue.component('Spin', Spin)
+Vue.component('Menu', Menu)
+Vue.component('Submenu', Submenu)
+Vue.component('MenuItem', MenuItem)
+Vue.component('Row', Row)
+Vue.component('Col', Col)
+Vue.component('Divider', Divider)
+Vue.component('Upload', Upload)
+Vue.prototype.$Message = Message
+Vue.prototype.$Modal = Modal

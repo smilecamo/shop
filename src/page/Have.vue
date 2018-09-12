@@ -8,6 +8,11 @@
 
 <script>
 export default {
+  // 更新的时候
+  beforeRouteUpdate (to, from, next) {
+    // ...
+    next()
+  },
   data () {
     return {
       columns4: [
@@ -58,7 +63,9 @@ export default {
                 },
                 on: {
                   click: () => {
-                    console.log(params.row.name)
+                    let id = params.row.name
+                    this.$router.push({path: `/edit/${id}`})
+                    // console.log(this.$route)
                   }
                 }
               }, 'View'),
@@ -69,7 +76,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    console.log(params.row.name)
+                    // console.log(params.row.name)
                   }
                 }
               }, 'Delete')
