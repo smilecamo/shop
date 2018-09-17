@@ -1,60 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// 初始数据
+import defaultStore from './state/state'
+// 更改数据
+import mutations from './mutation/mutation'
+// 异步更改数据
+import actions from './action/action'
+// 组装数据
+import getters from './getters/getters'
 Vue.use(Vuex)
-const store = new Vuex.Store({
-  state: {
-    name: 'name',
-    price: 'price',
-    current: 'current',
-    sort: 'sort',
-    sortList: [
-      {key: 1, value: '商品1'},
-      {key: 2, value: '商品2'},
-      {key: 3, value: '商品3'}
-    ],
-    brand: 'brand',
-    supplier: 'supplier',
-    abstract: 'abstract',
-    details: 'details',
-    content: 'content'
-  },
-  mutations: {
-    name (state, meaaage) {
-      state.name = meaaage
-    },
-    price (state, meaaage) {
-      state.price = meaaage
-    },
-    current (state, meaaage) {
-      state.current = meaaage
-    },
-    sort (state, meaaage) {
-      state.sort = meaaage
-    },
-    brand (state, meaaage) {
-      state.brand = meaaage
-    },
-    supplier (state, meaaage) {
-      state.supplier = meaaage
-    },
-    abstract (state, meaaage) {
-      state.abstract = meaaage
-    },
-    details (state, meaaage) {
-      state.details = meaaage
-    },
-    content (state, meaaage) {
-      state.content = meaaage
-    },
-    file (state, meaaage) {
-      state.file = meaaage
-    }
-  },
-  action: {
-    addStore (content) {
-      content.commit('add')
-    }
-  }
-})
-
-export default store
+// 生成store仓库
+export default () => {
+  return new Vuex.Store({
+    state: defaultStore,
+    mutations,
+    getters,
+    actions
+    // action: {
+    //   addStore (content) {
+    //     content.commit('add')
+    //   }
+    // }
+  })
+}

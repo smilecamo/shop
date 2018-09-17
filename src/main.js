@@ -3,10 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import createStore from './store/store'
 import './common/view.js'
 import './common/VueQuillEditor.js'
-import store from './store/store.js'
 Vue.config.productionTip = false
+
+const store = createStore()
 // 导航守卫全局
 router.beforeEach((to, from, next) => {
   // if (to.fullPath === '/add') {
