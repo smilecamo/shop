@@ -1,10 +1,10 @@
 // import Add from '@/page/ADD'
 // 路由懒加载
-const Add = () => import('@/page/ADD')
-const Have = () => import('@/page/Have')
-const Edit = () => import('@/page/Edit')
-const Tab = () => import('@/page/Tab')
-const Login = () => import('@/page/Login')
+const Add = () => import('@/page/user/ADD')
+const Have = () => import('@/page/user/Have')
+const Edit = () => import('@/page/user/Edit')
+const Tab = () => import('@/page/user/Tab')
+const Login = () => import('@/page/Login/Login')
 export default [
   {
     path: '/',

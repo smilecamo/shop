@@ -64,6 +64,7 @@ export default {
                 on: {
                   click: () => {
                     let id = params.row.name
+                    this.$store.commit('name', id)
                     this.$router.push({path: `/edit/${id}`})
                     // console.log(this.$route)
                   }

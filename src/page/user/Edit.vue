@@ -4,11 +4,12 @@
     <Divider dashed />
     <Edit :name='name' :show='show'></Edit>
     <router-view></router-view>
+    <Button type="primary">提交</Button>
   </div>
 </template>
 
 <script>
-import Edit from '../common/edit/edit'
+import Edit from '@/common/edit/edit'
 export default {
   beforeRouteEnter (to, from, next) {
     // ...
@@ -17,7 +18,7 @@ export default {
   beforeRouteUpdate (to, from, next) {
     // ...
     // console.log(this)
-    // next()
+    next()
   },
   components: {
     Edit

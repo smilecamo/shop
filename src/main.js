@@ -5,8 +5,8 @@ import App from './App'
 import router from './router'
 import './common/view.js'
 import './common/VueQuillEditor.js'
+import store from './store/store.js'
 Vue.config.productionTip = false
-
 // 导航守卫全局
 router.beforeEach((to, from, next) => {
   // if (to.fullPath === '/add') {
@@ -26,6 +26,7 @@ router.afterEach((to, from) => {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

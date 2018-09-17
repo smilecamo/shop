@@ -43,4 +43,4 @@ Vue.component('Col', Col)
 Vue.component('Divider', Divider)
 Vue.component('Upload', Upload)
 Vue.prototype.$Message = Message
-Vue.prototype.$Modal = Modal
+Vue.prototype.Modal = Modal

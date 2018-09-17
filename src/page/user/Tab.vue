@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import HeaderTab from './Header'
-import FooterTab from './Footer'
+import HeaderTab from '@/common/Header'
+import FooterTab from '@/common/Footer'
 export default {
   name: 'App',
   components: {
