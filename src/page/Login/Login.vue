@@ -1,53 +1,107 @@
 <template>
   <div class="login">
-    <div class="content">
-      this is login
-      <p>{{fullName}}</p>
-      <p>{{names}}</p>
-      <p>{{sortLists}}</p>
+    <div class="login-div">
+      <Tabs value="login">
+        <TabPane label="登录" name="login">
+          <Form class="content" ref="formInline">
+            <FormItem prop="user">
+              <Input type="text" v-model="user" placeholder="Username" clearable size="large">
+              <Icon type="md-contact" slot="prepend"></Icon>
+              </Input>
+            </FormItem>
+            <FormItem prop="password">
+              <Input type="password" v-model="password" placeholder="Password" clearable size="large">
+              <Icon type="md-lock" slot="prepend"></Icon>
+              </Input>
+            </FormItem>
+            <FormItem>
+              <Button style="width: 100%" type="primary" @click="login">Signin</Button>
+            </FormItem>
+          </Form>
+        </TabPane>
+        <TabPane label="重置密码" name="reset">
+          <Form class="content">
+            <FormItem prop="user">
+              <Input type="text" v-model="resetUser" placeholder="Username" clearable size="large">
+              <Icon type="md-contact" slot="prepend"></Icon>
+              </Input>
+            </FormItem>
+            <FormItem prop="password">
+              <Input type="password" v-model="OldPassword" placeholder="Old Password" clearable size="large">
+              <Icon type="md-lock" slot="prepend"></Icon>
+              </Input>
+            </FormItem>
+            <FormItem prop="password">
+              <Input type="password" v-model="NewPassword" placeholder="New Password" clearable size="large">
+              <Icon type="md-lock" slot="prepend"></Icon>
+              </Input>
+            </FormItem>
+            <FormItem>
+              <Button style="width: 100%" type="primary" @click="reset">reset</Button>
+            </FormItem>
+          </Form>
+        </TabPane>
+      </Tabs>
     </div>
   </div>
 </template>
-
 <script>
-import {
-  mapGetters,
-  mapState,
-  mapActions
-} from 'vuex'
 export default {
-  // 原生使用actions
-  // mounted () {
-  //   this.$store.dispatch('upDateName', {
-  //     name: 'namessss',
-  //     time: 2300
-  //   })
-  // },
-  // 借助...mapActions
-  mounted () {
-    this.upDateName({
-      name: 'namessss',
-      time: 2300
-    })
+  data () {
+    return {
+      user: '',
+      password: '',
+      resetUser: '',
+      OldPassword: '',
+      NewPassword: ''
+    }
   },
   methods: {
-    ...mapActions(['upDateName'])
-  },
-  computed: {
-    ...mapGetters(['fullName']),
-    // 自定义名称显示
-    ...mapState({
-      names: 'name',
-      sortLists: (state) => state.sortList
-    })
+    login () {
+      let user = this.user
+      let password = this.password
+      if (user === '' || password === '') {
+        this.$Message.error('请输入用户名或密码')
+      } else {
+        console.log(user, password)
+        this.$router.push('AdminTab')
+      }
+    },
+    reset () {
+      let user = this.resetUser
+      let password = this.OldPassword
+      if (user === '' || password === '') {
+        this.$Message.error('请输入用户名或密码')
+      } else {
+        console.log(user, password)
+      }
+    }
   }
 }
 </script>
 
-<style lang="stylus">
-.login{
+<style lang="stylus" scoped>
+.login {
+  background-image: url('../../assets/bg.jpg');
+  background-size: 100%;
   width: 100%;
+  margin: 0 auto;
   height: 100%;
-  background: #eee;
+  position: relative;
+}
+
+.login-div {
+  position: absolute;
+  right: 300px;
+  bottom: 400px;
+  width: 350px;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  margin: 20px;
+  width: 300px;
+  height: 250px;
 }
 </style>

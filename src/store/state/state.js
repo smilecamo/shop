@@ -1,4 +1,5 @@
 export default {
+  language: 'US',
   name: 'name',
   price: 'price',
   current: 'current',

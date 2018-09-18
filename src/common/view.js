@@ -21,7 +21,10 @@ import {
   Row,
   Col,
   Divider,
-  Upload
+  Upload,
+  Tabs,
+  TabPane,
+  BackTop
 } from 'iview'
 Vue.component('Button', Button)
 Vue.component('Table', Table)
@@ -42,5 +45,9 @@ Vue.component('Row', Row)
 Vue.component('Col', Col)
 Vue.component('Divider', Divider)
 Vue.component('Upload', Upload)
+Vue.component('Tabs', Tabs)
+Vue.component('TabPane', TabPane)
+Vue.component('BackTop', BackTop)
+Vue.component('Modal', Modal)
 Vue.prototype.$Message = Message
-Vue.prototype.Modal = Modal
+Vue.prototype.$Modal = Modal

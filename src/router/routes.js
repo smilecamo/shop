@@ -1,10 +1,16 @@
 // import Add from '@/page/ADD'
 // 路由懒加载
+const Login = () => import('@/page/Login/Login')
 const Add = () => import('@/page/user/ADD')
 const Have = () => import('@/page/user/Have')
 const Edit = () => import('@/page/user/Edit')
 const Tab = () => import('@/page/user/Tab')
-const Login = () => import('@/page/Login/Login')
+const AdminTab = () => import('@/page/admin/adminTab')
+const Audited = () => import('@/page/admin/Audited')
+const Account = () => import('@/page/admin/Account')
+const NewAccount = () => import('@/page/admin/NewAccount')
+const ModifyAccount = () => import('@/page/admin/ModifyAccount')
+const PendingReview = () => import('@/page/admin/PendingReview')
 export default [
   {
     path: '/',
@@ -43,6 +49,38 @@ export default [
         props: true,
         name: 'edit',
         component: Edit
+      }
+    ]
+  },
+  {
+    path: '/adminTab',
+    component: AdminTab,
+    name: 'AdminTab',
+    children: [
+      {
+        name: 'PendingReview',
+        path: '/PendingReview',
+        component: PendingReview
+      },
+      {
+        name: 'Account',
+        path: '/Account',
+        component: Account
+      },
+      {
+        name: 'ModifyAccount',
+        path: '/ModifyAccount/:id',
+        component: ModifyAccount
+      },
+      {
+        name: 'NewAccount',
+        path: '/NewAccount',
+        component: NewAccount
+      },
+      {
+        name: 'Audited',
+        path: '/Audited',
+        component: Audited
       }
     ]
   }
