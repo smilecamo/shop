@@ -1,6 +1,7 @@
 // import Add from '@/page/ADD'
 // 路由懒加载
 const Login = () => import('@/page/Login/Login')
+const Err = () => import('@/common/404')
 const Add = () => import('@/page/user/ADD')
 const Have = () => import('@/page/user/Have')
 const Edit = () => import('@/page/user/Edit')
@@ -15,6 +16,10 @@ export default [
   {
     path: '/',
     redirect: '/login'
+  },
+  {
+    path: '*',
+    component: Err
   },
   {
     path: '/login',

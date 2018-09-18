@@ -5,14 +5,24 @@
         <TabPane label="登录" name="login">
           <Form class="content" ref="formInline">
             <FormItem prop="user">
-              <Input type="text" v-model="user" placeholder="Username" clearable size="large">
-              <Icon type="md-contact" slot="prepend"></Icon>
-              </Input>
+              <Input
+              type="text"
+              v-model="user"
+              placeholder="Username"
+              clearable
+              size="large"
+              prefix="md-contact"
+              />
             </FormItem>
             <FormItem prop="password">
-              <Input type="password" v-model="password" placeholder="Password" clearable size="large">
-              <Icon type="md-lock" slot="prepend"></Icon>
-              </Input>
+              <Input
+              type="password"
+              v-model="password"
+              placeholder="Password"
+              clearable
+              size="large"
+              prefix="md-lock"
+              />
             </FormItem>
             <FormItem>
               <Button style="width: 100%" type="primary" @click="login">Signin</Button>
@@ -22,19 +32,34 @@
         <TabPane label="重置密码" name="reset">
           <Form class="content">
             <FormItem prop="user">
-              <Input type="text" v-model="resetUser" placeholder="Username" clearable size="large">
-              <Icon type="md-contact" slot="prepend"></Icon>
-              </Input>
+              <Input
+              type="text"
+              v-model="resetUser"
+              placeholder="Username"
+              clearable
+              size="large"
+              prefix="md-contact"
+              />
             </FormItem>
             <FormItem prop="password">
-              <Input type="password" v-model="OldPassword" placeholder="Old Password" clearable size="large">
-              <Icon type="md-lock" slot="prepend"></Icon>
-              </Input>
+              <Input
+              type="password"
+              v-model="OldPassword"
+              placeholder="Old Password"
+              clearable
+              size="large"
+              prefix="md-lock"
+              />
             </FormItem>
             <FormItem prop="password">
-              <Input type="password" v-model="NewPassword" placeholder="New Password" clearable size="large">
-              <Icon type="md-lock" slot="prepend"></Icon>
-              </Input>
+              <Input
+              type="password"
+              v-model="NewPassword"
+              placeholder="New Password"
+              clearable
+              size="large"
+              prefix="md-lock"
+              />
             </FormItem>
             <FormItem>
               <Button style="width: 100%" type="primary" @click="reset">reset</Button>
