@@ -11,8 +11,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "iview": "^3.1.0",
     "js-cookies": "^1.0.4",
+    "store": "^2.0.12",
     "uppy": "^0.27.3",
     "vue": "^2.5.2",
     "vue-i18n": "^8.1.0",

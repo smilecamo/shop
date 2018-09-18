@@ -89,6 +89,7 @@ export default {
         this.$Message.error('请输入用户名或密码')
       } else {
         console.log(user, password)
+        this.$store.commit('name', 45)
         this.$router.push('AdminTab')
       }
     },

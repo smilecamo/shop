@@ -30,6 +30,9 @@ export default [
     path: '/shop',
     name: 'Shop',
     component: Tab,
+    meta: {
+      needLogin: 'true'
+    },
     children: [
       {
         path: '/add',

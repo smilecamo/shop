@@ -11,12 +11,11 @@ Vue.config.productionTip = false
 const store = createStore()
 // 导航守卫全局
 router.beforeEach((to, from, next) => {
-  // if (to.fullPath === '/add') {
-  //   next('/edit/1')
-  // } else {
-  //   next()
-  // }
-  next()
+  if (to.meta.needLogin === 'true') {
+    store.state.name === '' ? next('/login') : next()
+  } else {
+    next()
+  }
 })
 router.beforeResolve((to, from, next) => {
   next()
