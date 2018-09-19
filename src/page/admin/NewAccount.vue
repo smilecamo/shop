@@ -11,6 +11,12 @@
       <FormItem label="密码">
         <Input v-model="password" placeholder="请输入密码" clearable/>
       </FormItem>
+      <FormItem label="权限">
+          <Select v-model="Permission">
+            <Option value="用户">用户</Option>
+            <Option value="管理员">管理员</Option>
+          </Select>
+      </FormItem>
       <FormItem>
         <Button
         type="primary"
@@ -25,7 +31,8 @@ export default {
   data () {
     return {
       name: '',
-      password: ''
+      password: '',
+      Permission: '用户'
     }
   },
   methods: {

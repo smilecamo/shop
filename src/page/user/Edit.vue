@@ -1,10 +1,10 @@
 <template>
   <div class="add-content">
-    <span class="content-header">编辑商品</span>
+    <span class="content-header">{{$t('user.edit')}}</span>
     <Divider dashed />
     <Edit :name='name' :show='show'></Edit>
     <router-view></router-view>
-    <Button type="primary">提交</Button>
+    <Button type="primary">{{$t('submit')}}</Button>
   </div>
 </template>
 

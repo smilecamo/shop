@@ -1,6 +1,6 @@
 <template>
   <div class="add-content">
-    <span class="content-header">已有商品</span>
+    <span class="content-header">{{$t('user.Already')}}</span>
     <Divider dashed />
     <Table border ref="selection" :columns="columns4" :data="data1"></Table>
   </div>
@@ -22,32 +22,32 @@ export default {
           align: 'center'
         },
         {
-          title: '商品名称',
+          title: this.$t('shop.name'),
           key: 'name',
           tooltip: true
         },
         {
-          title: '分类列表',
+          title: this.$t('shop.sort'),
           key: 'age',
           tooltip: true
         },
         {
-          title: '品牌名称',
+          title: this.$t('shop.brand'),
           key: 'address',
           tooltip: true
         },
         {
-          title: '供应商',
+          title: this.$t('shop.supplier'),
           key: 'address',
           tooltip: true
         },
         {
-          title: '原价',
+          title: this.$t('shop.cost'),
           key: 'address',
           tooltip: true
         },
         {
-          title: '操作',
+          title: this.$t('shop.action'),
           key: 'action',
           width: 150,
           align: 'center',
@@ -69,7 +69,7 @@ export default {
                     // console.log(this.$route)
                   }
                 }
-              }, 'View'),
+              }, 'edit'),
               h('Button', {
                 props: {
                   type: 'error',

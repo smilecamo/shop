@@ -5,7 +5,7 @@ const Err = () => import('@/common/404')
 const Add = () => import('@/page/user/ADD')
 const Have = () => import('@/page/user/Have')
 const Edit = () => import('@/page/user/Edit')
-const Tab = () => import('@/page/user/Tab')
+const UserTab = () => import('@/page/user/Tab')
 const AdminTab = () => import('@/page/admin/adminTab')
 const Audited = () => import('@/page/admin/Audited')
 const Account = () => import('@/page/admin/Account')
@@ -18,18 +18,14 @@ export default [
     redirect: '/login'
   },
   {
-    path: '*',
-    component: Err
-  },
-  {
     path: '/login',
     name: 'Login',
     component: Login
   },
   {
-    path: '/shop',
-    name: 'Shop',
-    component: Tab,
+    path: '/UserTab',
+    name: 'UserTab',
+    component: UserTab,
     meta: {
       needLogin: 'true'
     },
@@ -91,5 +87,12 @@ export default [
         component: Audited
       }
     ]
+  },
+  {
+    path: '*',
+    component: Err,
+    meta: {
+      title: 'Err'
+    }
   }
 ]

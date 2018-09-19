@@ -1,13 +1,13 @@
 <template>
   <div class="Setting">
     <Form :label-width="80" width='320' inline>
-    <FormItem label="Language" >
-      <Select v-model="language" style="width:100px">
-        <Option value="US">US</Option>
-        <Option value="EN">EN</Option>
+    <FormItem :label="$t('header.language')">
+      <Select v-model="language" style="width:100px" @on-change='changeLang'>
+        <Option value="en-US">en-US</Option>
+        <Option value="zh-CN">zh-CN</Option>
       </Select>
     </FormItem>
-    <Button>退出</Button>
+    <Button @click='quit'>{{$t('header.quit')}}</Button>
     </Form>
   </div>
 </template>
@@ -16,11 +16,22 @@
 export default {
   data () {
     return {
-      language: ''
+      language: 'en-US'
     }
   },
   created () {
-    this.language = this.$store.state.language
+    this.language = this.$Stores.get('language')
+  },
+  methods: {
+    changeLang (value) {
+      this.$Stores.set('language', value)
+      this.$router.go()
+    },
+    quit () {
+      sessionStorage.clear()
+      this.$Message.success('quit')
+      this.$router.push('/login')
+    }
   }
 }
 </script>

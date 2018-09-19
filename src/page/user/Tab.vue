@@ -4,16 +4,16 @@
     <Language />
     <Row class="content">
       <Col span="6">
-      <Menu accordion>
+      <Menu accordion active-name="add" :open-names="['1']">
         <Submenu name="1">
           <template slot="title">
-            <Icon type="ios-paper" /> 商品管理
+            {{$t('user.management')}}
           </template>
           <MenuItem name="add" to='/add'>
-          <Icon type="ios-add-circle" /> 新增商品
+          <Icon type="ios-add-circle" /> {{$t('user.add')}}
           </MenuItem>
           <MenuItem name="have" to='/have'>
-          <Icon type="ios-archive-outline" /> 已有商品
+          <Icon type="ios-archive-outline" /> {{$t('user.Already')}}
           </MenuItem>
         </Submenu>
       </Menu>
@@ -36,6 +36,9 @@ export default {
     HeaderTab,
     FooterTab,
     Language
+  },
+  created () {
+    console.log(JSON.parse(window.localStorage.getItem('name')))
   }
 }
 </script>

@@ -30,6 +30,12 @@
         <FormItem label="密码">
           <Input v-model="password" placeholder="请输入密码" clearable/>
         </FormItem>
+        <FormItem label="权限">
+          <Select v-model="Permission">
+            <Option value="用户">用户</Option>
+            <Option value="管理员">管理员</Option>
+          </Select>
+        </FormItem>
       </Form>
     </Modal>
     <BackTop />
@@ -41,6 +47,7 @@ export default {
     return {
       name: '',
       password: '',
+      Permission: '',
       ModifyAccount: false,
       // 设置初始化信息数
       dataCount: 100,
@@ -66,6 +73,12 @@ export default {
           tooltip: true
         },
         {
+          title: '权限',
+          key: 'Permission',
+          sortable: true,
+          tooltip: true
+        },
+        {
           title: '操作',
           key: 'action',
           width: 150,
@@ -85,6 +98,7 @@ export default {
                     this.ModifyAccount = true
                     this.name = params.row.userName
                     this.password = params.row.userPassword
+                    this.Permission = params.row.Permission
                   }
                 }
               }, 'View'),
@@ -107,26 +121,22 @@ export default {
         {
           userName: 'John Brown',
           userPassword: 18,
-          address: 'New York No. 1 Lake Park',
-          date: '2016-10-03'
+          Permission: '用户'
         },
         {
           userName: 'Jim Green',
           userPassword: 24,
-          address: 'London No. 1 Lake Park',
-          date: '2016-10-01'
+          Permission: '管理员'
         },
         {
           userName: 'Joe Black',
           userPassword: 30,
-          address: 'Sydney No. 1 Lake Park',
-          date: '2016-10-02'
+          Permission: '2016-10-02'
         },
         {
           userName: 'Jon Snow',
           userPassword: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
+          Permission: '2016-10-04'
         },
         {
           userName: 'Jon Snow',

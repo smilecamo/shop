@@ -22,6 +22,7 @@
               clearable
               size="large"
               prefix="md-lock"
+              @keyup.enter.native='login'
               />
             </FormItem>
             <FormItem>
@@ -76,21 +77,40 @@ export default {
     return {
       user: '',
       password: '',
+      role: '',
       resetUser: '',
       OldPassword: '',
       NewPassword: ''
     }
   },
+  created () {
+    let userEntity = JSON.parse(sessionStorage.getItem('user'))
+    console.log(userEntity)
+  },
   methods: {
     login () {
       let user = this.user
       let password = this.password
+      let role = 'user'
       if (user === '' || password === '') {
         this.$Message.error('请输入用户名或密码')
       } else {
-        console.log(user, password)
-        this.$store.commit('name', 45)
-        this.$router.push('AdminTab')
+        const userEntity = {
+          name: user,
+          age: password,
+          role: role
+        }
+        sessionStorage.setItem('user', JSON.stringify(userEntity))
+        // this.$Stores.set('user', { name: user })
+        // console.log(this.$Stores.get('user').name)
+        if (this.role === 'admin') {
+          this.$router.push('AdminTab')
+        } else {
+          this.$router.push('add')
+          // this.$Message.error('sh')
+        }
+        // this.role === 'admin' ? this.$router.push('AdminTab') : this.$router.push('userTab')
+        // this.$router.push('AdminTab')
       }
     },
     reset () {

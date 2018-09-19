@@ -1,13 +1,13 @@
 <template>
   <div class="add-content">
-    <span class="content-header">新增商品</span>
+    <span class="content-header">{{$t('user.add')}}</span>
     <Divider dashed />
     <Edit></Edit>
     <Button
       type="primary"
       @click=handle
       style="width: 50%,margin: 0 auto"
-      >提交</Button>
+      >{{$t('submit')}}</Button>
   <router-view />
   </div>
 </template>
