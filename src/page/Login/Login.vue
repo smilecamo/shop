@@ -118,10 +118,10 @@ export default {
         }
       })
         .then((res) => {
-          if (res.data === false) {
+          if (res.data.data === false) {
             this.shows = false
             this.$Message.error('用户名与密码不符合,请核对后重新输入')
-          } else if (res.data === true) {
+          } else if (res.data.data === true) {
             this.shows = true
           } else {
             this.$Message.error('未知问题')
@@ -141,10 +141,19 @@ export default {
         this.$axios({
           method: 'POST',
           url: '/api/merchandise/user/upUser',
-          params: {
-
+          data: {
+            'id': null,
+            'userName': this.resetUser,
+            'userPwd': this.NewPassword,
+            'role': null
           }
         })
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.data === null) {
+              this.$Message.success('success')
+            }
+          })
       }
     },
     login () {
@@ -162,8 +171,9 @@ export default {
           }
         })
           .then((res) => {
-            const role = res.data.role
-            const userName = res.data.user
+            console.log(res.data)
+            const role = res.data.data.role
+            const userName = res.data.data.userName
             let users = {
               role: role,
               user: userName
@@ -171,6 +181,7 @@ export default {
             if (role === 1) {
               sessionStorage.setItem('role', JSON.stringify(users))
               this.$router.push('AdminTab')
+              console.log(role, userName)
             } else if (role === 0) {
               sessionStorage.setItem('role', JSON.stringify(users))
               this.$router.push('add')

@@ -17,9 +17,7 @@
       </FormItem>
       <FormItem :label="$t('shop.brand')">
         <Select v-model="brand">
-          <Option value="New York">New York</Option>
-          <Option value="London">London</Option>
-          <Option value="Sydney">Sydney</Option>
+          <Option v-for='item in brandList' :key='item.key' :value="item.key">{{item.value}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.supplier')">
@@ -37,6 +35,12 @@
         </quill-editor>
       </FormItem>
       <FormItem :label="$t('shop.thumbnail')">
+        <img-inputer
+        auto-uoload=false
+        v-model="file"
+        theme="light"
+        img-src='https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1537423892&di=6575bd863508da7588ce34e5af953b97&src=http://shuo.weiweiqi.com/wp-content/uploads/2017/08/tutu06.jpg'
+        size="small"/>
       </FormItem>
     </Form>
   </div>
@@ -133,11 +137,13 @@ export default {
   },
   created () {
     this.sortList = this.$store.state.sortList
+    this.brandList = this.$store.state.brandList
   },
   data () {
     return {
       shows: this.show,
       sortList: [],
+      brandList: [],
       editorOption: {
         modules: {
           toolbar: [

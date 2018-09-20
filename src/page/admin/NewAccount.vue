@@ -13,8 +13,8 @@
       </FormItem>
       <FormItem label="权限">
           <Select v-model="Permission">
-            <Option value="用户">用户</Option>
-            <Option value="管理员">管理员</Option>
+            <Option value="0">用户</Option>
+            <Option value="1">管理员</Option>
           </Select>
       </FormItem>
       <FormItem>
@@ -32,18 +32,38 @@ export default {
     return {
       name: '',
       password: '',
-      Permission: '用户'
+      Permission: '0'
     }
   },
   methods: {
     newAccount () {
       let name = this.name
       let password = this.password
+      // let role = this.Permission
       if (name === '' || password === '') {
         this.$Message.error('请输入用户名或密码')
       } else {
-        console.log(name)
-        console.log(password)
+        // let PostUser = {
+
+        // }
+        this.$axios({
+          method: 'POST',
+          url: '/api/merchandise/user/addUser',
+          data: {
+            'id': null,
+            'userName': this.name,
+            'userPwd': this.password,
+            'role': this.Permission
+          }
+        })
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.data === null) {
+              this.$Message.success('success')
+            } else {
+              this.$Message.success('err')
+            }
+          })
         this.$router.push('Account')
       }
     }

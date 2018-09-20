@@ -35,7 +35,8 @@ export default [
         name: 'Add',
         component: Add,
         meta: {
-          title: '商品添加页'
+          title: '商品添加页',
+          needLogin: 'true'
         },
         // 路由导航 进入之前
         beforeEnter: (to, from, next) => {
@@ -46,13 +47,19 @@ export default [
       {
         path: '/have',
         name: 'Have',
-        component: Have
+        component: Have,
+        meta: {
+          needLogin: 'true'
+        }
       },
       {
         path: '/edit/:id',
         props: true,
         name: 'edit',
-        component: Edit
+        component: Edit,
+        meta: {
+          needLogin: 'true'
+        }
       }
     ]
   },
@@ -60,31 +67,55 @@ export default [
     path: '/adminTab',
     component: AdminTab,
     name: 'AdminTab',
+    meta: {
+      needLogin: 'true',
+      admin: 'true'
+    },
     children: [
       {
         name: 'PendingReview',
         path: '/PendingReview',
-        component: PendingReview
+        component: PendingReview,
+        meta: {
+          needLogin: 'true',
+          admin: 'true'
+        }
       },
       {
         name: 'Account',
         path: '/Account',
-        component: Account
+        component: Account,
+        meta: {
+          needLogin: 'true',
+          admin: 'true'
+        }
       },
       {
         name: 'ModifyAccount',
         path: '/ModifyAccount/:id',
-        component: ModifyAccount
+        component: ModifyAccount,
+        meta: {
+          needLogin: 'true',
+          admin: 'true'
+        }
       },
       {
         name: 'NewAccount',
         path: '/NewAccount',
-        component: NewAccount
+        component: NewAccount,
+        meta: {
+          needLogin: 'true',
+          admin: 'true'
+        }
       },
       {
         name: 'Audited',
         path: '/Audited',
-        component: Audited
+        component: Audited,
+        meta: {
+          needLogin: 'true',
+          admin: 'true'
+        }
       }
     ]
   },

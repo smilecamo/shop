@@ -10,6 +10,12 @@ export default {
     {key: 3, value: '商品3'}
   ],
   brand: 'brand',
+  brandList: [
+    {
+      key: 3,
+      value: '商品3'
+    }
+  ],
   supplier: 'supplier',
   abstract: 'abstract',
   details: 'details',
