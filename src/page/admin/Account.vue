@@ -2,13 +2,6 @@
   <div>
     <span class="content-header">{{$t('admin.existing')}}</span>
     <Divider dashed />
-    <Input
-    search
-    enter-button
-    placeholder="search name"
-    style="width: auto"
-    @on-search="searchName"
-    />
     <Divider dashed />
     <Table border ref="selection" :columns="brandHeader" :data="data1"></Table>
     <Page
@@ -25,6 +18,7 @@
         <FormItem label="用户名">
           <Input v-model="name"
           placeholder="请输入用户名"
+          @on-blur='userName'
           clearable/>
         </FormItem>
         <FormItem label="密码">
@@ -32,8 +26,8 @@
         </FormItem>
         <FormItem label="权限">
           <Select v-model="Permission">
-            <Option value="用户">用户</Option>
-            <Option value="管理员">管理员</Option>
+            <Option value="0">用户</Option>
+            <Option value="1">管理员</Option>
           </Select>
         </FormItem>
       </Form>
@@ -56,19 +50,8 @@ export default {
       // 设置表格头部
       brandHeader: [
         {
-          type: 'selection',
-          width: 60,
-          align: 'center'
-        },
-        {
           title: '账户名',
           key: 'userName',
-          sortable: true,
-          tooltip: true
-        },
-        {
-          title: '密码',
-          key: 'userPassword',
           sortable: true,
           tooltip: true
         },
@@ -97,7 +80,6 @@ export default {
                   click: () => {
                     this.ModifyAccount = true
                     this.name = params.row.userName
-                    this.password = params.row.userPassword
                     this.Permission = params.row.Permission
                   }
                 }
@@ -121,22 +103,22 @@ export default {
         {
           userName: 'John Brown',
           userPassword: 18,
-          Permission: '用户'
+          Permission: '0'
         },
         {
           userName: 'Jim Green',
           userPassword: 24,
-          Permission: '管理员'
+          Permission: '0'
         },
         {
           userName: 'Joe Black',
           userPassword: 30,
-          Permission: '2016-10-02'
+          Permission: '1'
         },
         {
           userName: 'Jon Snow',
           userPassword: 26,
-          Permission: '2016-10-04'
+          Permission: '1'
         },
         {
           userName: 'Jon Snow',
@@ -272,17 +254,42 @@ export default {
       console.log(index)
     },
     ok () {
-      this.$Message.info(`${this.name}--${this.password}`)
+      if (this.name === '' || this.password === '') {
+        this.$Message.error('请输入用户名或密码')
+      } else {
+        this.$axios({
+          method: 'POST',
+          url: '/api/merchandise/user/upUser',
+          data: {
+            'id': null,
+            'userName': this.name,
+            'userPwd': this.password,
+            'role': null
+          }
+        })
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.data === null) {
+              this.$Message.success('success')
+            } else {
+              this.$Message.error('err')
+            }
+          })
+      }
     },
     cancel () {
       this.$Message.info('Clicked cancel')
     },
-    searchName (value) {
-      if (value === '') {
-        this.$Message.error('不能为空')
-      } else {
-        console.log(value)
-      }
+    userName () {
+      this.$axios({
+        method: 'GET',
+        url: `/api/merchandise/user/selUserName/${this.name}`
+      })
+        .then((res) => {
+          if (res.data.data === false) {
+            this.$Message.error('用户名不存在,请核对后重新输入')
+          }
+        })
     }
   }
 }

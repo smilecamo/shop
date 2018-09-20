@@ -1,23 +1,14 @@
 export default {
   language: 'US',
   name: '',
-  price: 'price',
-  current: 'current',
-  sort: 'sort',
-  sortList: [
-    {key: 1, value: '商品1'},
-    {key: 2, value: '商品2'},
-    {key: 3, value: '商品3'}
-  ],
-  brand: 'brand',
-  brandList: [
-    {
-      key: 3,
-      value: '商品3'
-    }
-  ],
-  supplier: 'supplier',
-  abstract: 'abstract',
-  details: 'details',
-  content: 'content'
+  price: '',
+  current: '',
+  sort: '',
+  sortList: [],
+  brand: '',
+  brandList: [],
+  supplier: '',
+  abstract: '',
+  details: '',
+  content: ''
 }

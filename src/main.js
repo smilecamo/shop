@@ -15,11 +15,17 @@ import './common/VueQuillEditor.js'
 import langEN from './common/lang/en.js'
 import langUS from './common/lang/us.js'
 Vue.use(VueI18n)
+// 图片设置
 Vue.component('ImgInputer', ImgInputer)
-var reg = new RegExp('"', 'g')
-let lang = localStorage.getItem(`language`)
-lang = lang.replace(reg, '')
-Vue.config.lang = lang
+// 语言设置
+if (localStorage.getItem(`language`)) {
+  let reg = new RegExp('"', 'g')
+  let lang = localStorage.getItem(`language`)
+  lang = lang.replace(reg, '')
+  Vue.config.lang = lang
+} else {
+  Vue.config.lang = 'en-US'
+}
 Vue.locale('en-US', langUS)
 Vue.locale('zh-CN', langEN)
 Vue.config.productionTip = false

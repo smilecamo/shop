@@ -12,12 +12,12 @@
       </FormItem>
       <FormItem :label="$t('shop.sort')">
         <Select v-model="sort">
-          <Option v-for='item in sortList' :key='item.key' :value="item.key">{{item.value}}</Option>
+          <Option v-for='item in sortList' :key='item.id' :value="item.name">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.brand')">
         <Select v-model="brand">
-          <Option v-for='item in brandList' :key='item.key' :value="item.key">{{item.value}}</Option>
+          <Option v-for='item in brandList' :key='item.id' :value="item.name">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.supplier')">
@@ -135,9 +135,27 @@ export default {
       }
     }
   },
-  created () {
-    this.sortList = this.$store.state.sortList
-    this.brandList = this.$store.state.brandList
+  mounted () {
+    this.$axios({
+      method: 'GET',
+      url: '/api/merchandise/sort/list'
+    })
+      .then((res) => {
+        this.sortList = res.data.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    this.$axios({
+      method: 'GET',
+      url: '/api/merchandise/brand/list'
+    })
+      .then((res) => {
+        this.brandList = res.data.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   data () {
     return {

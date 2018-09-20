@@ -102,7 +102,7 @@ export default {
         url: `/api/merchandise/user/selUserName/${this.resetUser}`
       })
         .then((res) => {
-          if (res.data === false) {
+          if (res.data.data === false) {
             this.$Message.error('用户名不存在,请核对后重新输入')
           }
         })
@@ -212,7 +212,7 @@ export default {
 .login-div {
   position: absolute;
   right: 300px;
-  bottom: 400px;
+  top: 300px;
   width: 350px;
   height: 300px;
   background: rgba(0, 0, 0, 0.5);
