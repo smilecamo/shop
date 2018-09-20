@@ -1,9 +1,9 @@
 <template>
   <div>
-    <span class="content-header">新增账户</span>
+    <span class="content-header">{{$t('admin.add')}}</span>
     <Divider dashed />
     <Form :label-width="80">
-      <FormItem label="用户名">
+      <FormItem :label="$t('admin.name')">
         <Input v-model="name"
         placeholder="请输入用户名"
         clearable/>

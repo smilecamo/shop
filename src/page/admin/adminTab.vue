@@ -6,24 +6,24 @@
       <Menu accordion>
         <Submenu name="1">
           <template slot="title">
-            <Icon type="ios-paper" /> 商品管理
+            {{$t('user.management')}}
           </template>
           <MenuItem name="pending-review" to="pendingReview">
-          <Icon type="ios-add-circle" /> 待审核商品
+          <Icon type="ios-add-circle" /> {{$t('admin.pending')}}
           </MenuItem>
           <MenuItem name="audited" to="audited">
-          <Icon type="ios-archive-outline" /> 已审核商品
+          <Icon type="ios-archive-outline" /> {{$t('admin.audited')}}
           </MenuItem>
         </Submenu>
         <Submenu name="2">
           <template slot="title">
-            <Icon type="ios-paper" /> 账户管理
+            {{$t('admin.account')}}
           </template>
           <MenuItem name="NewAccount" to="newAccount">
-          <Icon type="ios-add-circle" /> 新增账户
+          <Icon type="ios-add-circle" /> {{$t('admin.add')}}
           </MenuItem>
           <MenuItem name="Account" to="account">
-          <Icon type="ios-add-circle" /> 已有账户
+          <Icon type="ios-add-circle" /> {{$t('admin.existing')}}
           </MenuItem>
         </Submenu>
       </Menu>

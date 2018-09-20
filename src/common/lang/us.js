@@ -22,5 +22,15 @@ module.exports = {
     add: 'Add item',
     Already: 'Existing goods',
     edit: 'Edit product'
+  },
+  admin: {
+    pending: 'Pending review',
+    audited: 'Audited',
+    account: 'Account management',
+    add: 'Add account',
+    existing: 'Existing account',
+    name: 'Name',
+    password: 'Password',
+    role: 'role'
   }
 }

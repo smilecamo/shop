@@ -38,7 +38,7 @@ export default {
     Language
   },
   created () {
-    console.log(JSON.parse(window.localStorage.getItem('name')))
+    // console.log(JSON.parse(window.localStorage.getItem('name')))
   }
 }
 </script>

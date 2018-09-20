@@ -22,5 +22,15 @@ module.exports = {
     add: '新增商品',
     Already: '已有商品',
     edit: '编辑商品'
+  },
+  admin: {
+    pending: '待审核商品',
+    audited: '已审核商品',
+    account: '账户管理',
+    add: '新增账户',
+    existing: '已有账户',
+    name: '用户名',
+    password: '密码',
+    role: '权限'
   }
 }

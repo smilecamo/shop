@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-div">
       <Tabs value="login">
-        <TabPane label="登录" name="login">
+        <TabPane label="Login" name="login">
           <Form class="content" ref="formInline">
             <FormItem prop="user">
               <Input
@@ -26,11 +26,11 @@
               />
             </FormItem>
             <FormItem>
-              <Button style="width: 100%" type="primary" @click="login">Signin</Button>
+              <Button style="width: 100%" type="primary" @click="login">Login</Button>
             </FormItem>
           </Form>
         </TabPane>
-        <TabPane label="重置密码" name="reset">
+        <TabPane label="Reset Password" name="reset">
           <Form class="content">
             <FormItem prop="user">
               <Input
@@ -40,6 +40,7 @@
               clearable
               size="large"
               prefix="md-contact"
+              @on-blur='userName'
               />
             </FormItem>
             <FormItem prop="password">
@@ -50,6 +51,7 @@
               clearable
               size="large"
               prefix="md-lock"
+              @on-blur='userPwd'
               />
             </FormItem>
             <FormItem prop="password">
@@ -60,10 +62,15 @@
               clearable
               size="large"
               prefix="md-lock"
+              @keyup.enter.native='resetPwd'
               />
             </FormItem>
             <FormItem>
-              <Button style="width: 100%" type="primary" @click="reset">reset</Button>
+              <Button
+              v-show='shows'
+              style="width: 100%"
+              type="primary"
+              @click="resetPwd">reset</Button>
             </FormItem>
           </Form>
         </TabPane>
@@ -77,49 +84,104 @@ export default {
     return {
       user: '',
       password: '',
-      role: '',
       resetUser: '',
       OldPassword: '',
-      NewPassword: ''
+      NewPassword: '',
+      shows: false
     }
   },
-  created () {
-    let userEntity = JSON.parse(sessionStorage.getItem('user'))
-    console.log(userEntity)
-  },
+  // created () {
+  //   let userEntity = JSON.parse(sessionStorage.getItem('user'))
+  //   // console.log(userEntity)
+  // },
   methods: {
+    // 判断用户名是否存在
+    userName () {
+      this.$axios({
+        method: 'GET',
+        url: `/api/merchandise/user/selUserName/${this.resetUser}`
+      })
+        .then((res) => {
+          if (res.data === false) {
+            this.$Message.error('用户名不存在,请核对后重新输入')
+          }
+        })
+    },
+    // 判断用户名密码是否一致
+    userPwd () {
+      this.$axios({
+        method: 'POST',
+        url: '/api/merchandise/user/selUser',
+        params: {
+          name: this.resetUser,
+          pwd: this.OldPassword
+        }
+      })
+        .then((res) => {
+          if (res.data === false) {
+            this.shows = false
+            this.$Message.error('用户名与密码不符合,请核对后重新输入')
+          } else if (res.data === true) {
+            this.shows = true
+          } else {
+            this.$Message.error('未知问题')
+            this.shows = false
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$Message.error('接口报错')
+        })
+    },
+    // 修改密码
+    resetPwd () {
+      if (this.resetUser === '' || this.OldPassword === '' || this.NewPassword === '') {
+        this.$Message.error('请输入用户名或密码')
+      } else {
+        this.$axios({
+          method: 'POST',
+          url: '/api/merchandise/user/upUser',
+          params: {
+
+          }
+        })
+      }
+    },
     login () {
       let user = this.user
       let password = this.password
-      let role = 'user'
       if (user === '' || password === '') {
         this.$Message.error('请输入用户名或密码')
       } else {
-        const userEntity = {
-          name: user,
-          age: password,
-          role: role
-        }
-        sessionStorage.setItem('user', JSON.stringify(userEntity))
-        // this.$Stores.set('user', { name: user })
-        // console.log(this.$Stores.get('user').name)
-        if (this.role === 'admin') {
-          this.$router.push('AdminTab')
-        } else {
-          this.$router.push('add')
-          // this.$Message.error('sh')
-        }
-        // this.role === 'admin' ? this.$router.push('AdminTab') : this.$router.push('userTab')
-        // this.$router.push('AdminTab')
-      }
-    },
-    reset () {
-      let user = this.resetUser
-      let password = this.OldPassword
-      if (user === '' || password === '') {
-        this.$Message.error('请输入用户名或密码')
-      } else {
-        console.log(user, password)
+        this.$axios({
+          method: 'POST',
+          url: `/api/merchandise/adminLogin`,
+          params: {
+            username: user,
+            password: password
+          }
+        })
+          .then((res) => {
+            const role = res.data.role
+            const userName = res.data.user
+            let users = {
+              role: role,
+              user: userName
+            }
+            if (role === 1) {
+              sessionStorage.setItem('role', JSON.stringify(users))
+              this.$router.push('AdminTab')
+            } else if (role === 0) {
+              sessionStorage.setItem('role', JSON.stringify(users))
+              this.$router.push('add')
+            } else {
+              this.$Message.error('登录名或密码错误')
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+            this.$Message.error('接口报错')
+          })
       }
     }
   }

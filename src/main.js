@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Store from 'store'
+import axios from 'axios'
 import VueI18n from 'vue-i18n'
 import App from './App'
 import router from './router'
@@ -14,12 +15,12 @@ Vue.use(VueI18n)
 var reg = new RegExp('"', 'g')
 let lang = localStorage.getItem(`language`)
 lang = lang.replace(reg, '')
-console.log(lang)
 Vue.config.lang = lang
 Vue.locale('en-US', langUS)
 Vue.locale('zh-CN', langEN)
 Vue.config.productionTip = false
 Vue.prototype.$Stores = Store
+Vue.prototype.$axios = axios
 const store = createStore()
 // 导航守卫全局
 router.beforeEach((to, from, next) => {

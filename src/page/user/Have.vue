@@ -214,6 +214,15 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    this.$axios.get('/api/merchandise/brand/list')
+      .then((res) => {
+        console.log(res)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 }
 </script>

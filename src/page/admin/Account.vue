@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="content-header">已有账户</span>
+    <span class="content-header">{{$t('admin.existing')}}</span>
     <Divider dashed />
     <Input
     search
