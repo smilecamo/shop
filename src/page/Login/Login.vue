@@ -171,7 +171,6 @@ export default {
           }
         })
           .then((res) => {
-            console.log(res.data)
             const role = res.data.data.role
             const userName = res.data.data.userName
             let users = {
@@ -191,7 +190,7 @@ export default {
           })
           .catch((err) => {
             console.log(err)
-            this.$Message.error('接口报错')
+            this.$Message.error('失败')
           })
       }
     }
