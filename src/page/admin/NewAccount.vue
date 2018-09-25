@@ -6,7 +6,9 @@
       <FormItem :label="$t('admin.name')">
         <Input v-model="name"
         placeholder="请输入用户名"
-        clearable/>
+        clearable
+        @on-blur='userName'
+        />
       </FormItem>
       <FormItem label="密码">
         <Input v-model="password" placeholder="请输入密码" clearable/>
@@ -19,6 +21,7 @@
       </FormItem>
       <FormItem>
         <Button
+        v-show="show"
         type="primary"
         @click="newAccount"
         >新增账户</Button>
@@ -32,20 +35,32 @@ export default {
     return {
       name: '',
       password: '',
-      Permission: '0'
+      Permission: '0',
+      show: false
     }
   },
   methods: {
+    // 判断用户名是否存在
+    userName () {
+      this.$axios({
+        method: 'GET',
+        url: `/api/merchandise/user/selUserName/${this.name}`
+      })
+        .then((res) => {
+          if (res.data.data === true) {
+            this.$Message.error('用户名已存在,请核对后重新输入')
+            this.show = false
+          } else {
+            this.show = true
+          }
+        })
+    },
     newAccount () {
       let name = this.name
       let password = this.password
-      // let role = this.Permission
       if (name === '' || password === '') {
         this.$Message.error('请输入用户名或密码')
       } else {
-        // let PostUser = {
-
-        // }
         this.$axios({
           method: 'POST',
           url: '/api/merchandise/user/addUser',

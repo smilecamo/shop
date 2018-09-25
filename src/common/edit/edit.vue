@@ -42,6 +42,18 @@
         img-src='https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1537423892&di=6575bd863508da7588ce34e5af953b97&src=http://shuo.weiweiqi.com/wp-content/uploads/2017/08/tutu06.jpg'
         size="small"/>
       </FormItem>
+      <FormItem label="图集">
+        <span style="margin: 0 10px" v-for="item of imgList" :key="item.id">
+          <img-inputer
+          auto-uoload=false
+          v-model="files"
+          :img-src="item.img"
+          theme="light"
+          size="small"
+          @on-change='imgChange'
+          />
+        </span>
+      </FormItem>
     </Form>
   </div>
 </template>
@@ -133,6 +145,11 @@ export default {
       set (value) {
         this.$store.commit('file', value)
       }
+    },
+    imgList: {
+      get () {
+        return this.$store.state.imgList
+      }
     }
   },
   mounted () {
@@ -157,10 +174,16 @@ export default {
         console.log(err)
       })
   },
+  methods: {
+    imgChange () {
+      console.log(this)
+    }
+  },
   data () {
     return {
       shows: this.show,
       sortList: [],
+      files: '',
       brandList: [],
       editorOption: {
         modules: {

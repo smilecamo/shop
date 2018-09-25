@@ -20,6 +20,7 @@
     <Button
     type="error"
     class="left"
+    @click='delUsers'
     >Delete</Button>
     </div>
     <Modal
@@ -99,11 +100,13 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.ModifyAccount = true
-                    this.name = params.row.userName
-                    let per = params.row.role
-                    this.Permission = per.toString()
-                    console.log(this.Permission)
+                    console.log(params.row.userName)
+                    this.$router.push({name: 'ModifyAccount', params: { name: params.row.userName, role: params.row.role, id: params.row.id }})
+                    // this.ModifyAccount = true
+                    // this.name = params.row.userName
+                    // let per = params.row.role
+                    // this.Permission = per.toString()
+                    // console.log(this.Permission)
                   }
                 }
               }, 'View'),
@@ -195,7 +198,7 @@ export default {
           console.log(err)
         })
     },
-    // 全选
+    // 选中的数据
     selection (selection) {
       let arr = []
       // var tt  = [...new Set([5,5,6,6,8,])]
@@ -209,14 +212,7 @@ export default {
       this.arr = tt
       console.log(this.arr)
     },
-    //     import qs from 'qs';
-    // const data = { 'bar': 123 };
-    // const options = {
-    //   method: 'POST',
-    //   headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    //   data: qs.stringify(data),
-    //   url,
-    // };
+    // 删除单个用户
     delUser (val) {
       this.$axios({
         method: 'POST',
@@ -224,12 +220,39 @@ export default {
         // headers: {
         //   'Content-Type': 'application/x-www-form-urlencoded'
         // },
-        data: {
-          'id': this.$qs.stringify(val)
+        params: {
+          id: val
         }
       })
         .then((res) => {
-          console.log(res)
+          if (res.data.data === null) {
+            this.$Message.success('success')
+            this.roleList()
+          } else {
+            this.$Message.error('error')
+          }
+        })
+    },
+    // 删除多个用户
+    delUsers (val) {
+      this.$axios({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        // responseType: 'json',
+        url: '/api/merchandise/user/delUsers',
+        params: {
+          'id': this.arr
+        }
+      })
+        .then((res) => {
+          if (res.data.data === null) {
+            this.$Message.success('success')
+            this.roleList()
+          } else {
+            this.$Message.error('error')
+          }
         })
     }
   },

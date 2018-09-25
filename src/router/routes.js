@@ -92,7 +92,7 @@ export default [
       },
       {
         name: 'ModifyAccount',
-        path: '/ModifyAccount/:id',
+        path: '/ModifyAccount',
         component: ModifyAccount,
         meta: {
           needLogin: 'true',

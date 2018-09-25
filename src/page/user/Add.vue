@@ -15,30 +15,6 @@
 <script>
 import Edit from '@/common/edit/edit'
 export default {
-  // 路由导航
-  // 进入之前
-  // beforeRouteEnter (to, from, next) {
-  //   // ...
-
-  // },
-  // // 更新的时候
-  // beforeUpdate (to, from, next) {
-  //   // ...
-  //   next()
-  // },
-  // 离开
-  // beforeRouteLeave (to, from, next) {
-  //   this.$Modal.confirm({
-  //     title: '离开温馨提醒',
-  //     content: '<p>你确定要离开当前页面</p>',
-  //     okText: 'OK',
-  //     cancelText: 'Cancel',
-  //     onOk: () => {
-  //       next()
-  //     }
-  //   }
-  //   )
-  // },
   components: {
     Edit
   },
@@ -66,6 +42,7 @@ export default {
       console.log(this.$store.state.details)
       console.log(this.$store.state.content)
       console.log(this.$store.state.file)
+      console.log(this.$store.state.imgList)
     }
   },
   data () {
