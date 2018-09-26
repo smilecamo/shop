@@ -14,6 +14,9 @@ import './common/view.js'
 import './common/VueQuillEditor.js'
 import langEN from './common/lang/en.js'
 import langUS from './common/lang/us.js'
+// 图片上传
+const VueUploadComponent = require('vue-upload-component')
+Vue.component('file-upload', VueUploadComponent)
 Vue.use(VueI18n)
 // 图片设置
 Vue.component('ImgInputer', ImgInputer)

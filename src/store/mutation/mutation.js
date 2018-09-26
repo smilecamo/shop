@@ -1,32 +1,38 @@
 export default {
-  name (state, meaaage) {
-    state.name = meaaage
+  name (state, message) {
+    state.name = message
   },
-  price (state, meaaage) {
-    state.price = meaaage
+  price (state, message) {
+    state.price = message
   },
-  current (state, meaaage) {
-    state.current = meaaage
+  show (state, message) {
+    state.show = message
   },
-  sort (state, meaaage) {
-    state.sort = meaaage
+  current (state, message) {
+    state.current = message
   },
-  brand (state, meaaage) {
-    state.brand = meaaage
+  sort (state, message) {
+    state.sort = message
   },
-  supplier (state, meaaage) {
-    state.supplier = meaaage
+  brand (state, message) {
+    state.brand = message
   },
-  abstract (state, meaaage) {
-    state.abstract = meaaage
+  supplier (state, message) {
+    state.supplier = message
   },
-  details (state, meaaage) {
-    state.details = meaaage
+  abstract (state, message) {
+    state.abstract = message
   },
-  content (state, meaaage) {
-    state.content = meaaage
+  details (state, message) {
+    state.details = message
   },
-  file (state, meaaage) {
-    state.file = meaaage
+  content (state, message) {
+    state.content = message
+  },
+  file (state, message) {
+    state.file = message
+  },
+  imgList (state, message) {
+    state.imgList = message
   }
 }

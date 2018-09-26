@@ -1,6 +1,7 @@
 export default {
   language: 'US',
   name: '',
+  show: false,
   price: '',
   current: '',
   sort: '',

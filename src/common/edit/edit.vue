@@ -43,17 +43,28 @@
         size="small"/>
       </FormItem>
       <FormItem label="图集">
-        <span style="margin: 0 10px" v-for="item of imgList" :key="item.id">
+        <span style="margin: 0 10px">
           <img-inputer
+          ref="image"
           auto-uoload=false
           v-model="files"
-          :img-src="item.img"
           theme="light"
           size="small"
-          @on-change='imgChange'
           />
+          <Button>删除</Button>
+        </span>
+        <span style="margin: 0 10px">
+          <img-inputer
+          ref="image1"
+          auto-uoload=false
+          v-model="bas"
+          theme="light"
+          size="small"
+          />
+          <Button>删除</Button>
         </span>
       </FormItem>
+      <Button @click="imgs">aaa</Button>
     </Form>
   </div>
 </template>
@@ -177,13 +188,20 @@ export default {
   methods: {
     imgChange () {
       console.log(this)
+    },
+    imgs () {
+      const base64 = this.$refs.image.$el.querySelector('.img-inputer__preview-img').src
+      const base641 = this.$refs.image1.$el.querySelector('.img-inputer__preview-img').src
+      const base642 = this.$refs.image2.$el.querySelector('.img-inputer__preview-img').src
+      console.log(base64, base641, base642)
     }
   },
   data () {
     return {
-      shows: this.show,
+      shows: this.$store.show,
       sortList: [],
       files: '',
+      bas: '',
       brandList: [],
       editorOption: {
         modules: {

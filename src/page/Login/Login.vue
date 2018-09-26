@@ -180,6 +180,7 @@ export default {
             if (role === 1) {
               sessionStorage.setItem('role', JSON.stringify(users))
               this.$router.push('AdminTab')
+              this.$store.commit('show', true)
               console.log(role, userName)
             } else if (role === 0) {
               sessionStorage.setItem('role', JSON.stringify(users))

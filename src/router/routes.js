@@ -111,11 +111,11 @@ export default [
       {
         name: 'Audited',
         path: '/Audited',
-        component: Audited,
-        meta: {
-          needLogin: 'true',
-          admin: 'true'
-        }
+        component: Audited
+        // meta: {
+        //   needLogin: 'true',
+        //   admin: 'true'
+        // }
       }
     ]
   },

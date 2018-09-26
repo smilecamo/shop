@@ -29,6 +29,7 @@ export default {
     this.$store.state.details = ''
     this.$store.state.content = ''
     this.$store.state.file = ''
+    this.$store.state.imgList = []
   },
   methods: {
     handle () {

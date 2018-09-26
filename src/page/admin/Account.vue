@@ -23,29 +23,6 @@
     @click='delUsers'
     >Delete</Button>
     </div>
-    <Modal
-        v-model="ModifyAccount"
-        title="修改账户"
-        @on-ok="ok"
-        @on-cancel="cancel">
-      <Form :label-width="80">
-        <FormItem label="用户名">
-          <Input v-model="name"
-          placeholder="请输入用户名"
-          @on-blur='userName'
-          clearable/>
-        </FormItem>
-        <FormItem label="密码">
-          <Input v-model="password" placeholder="请输入密码" clearable/>
-        </FormItem>
-        <FormItem label="权限">
-          <Select v-model="Permission">
-            <Option value="0">用户</Option>
-            <Option value="1">管理员</Option>
-          </Select>
-        </FormItem>
-      </Form>
-    </Modal>
     <BackTop />
   </div>
 </template>
