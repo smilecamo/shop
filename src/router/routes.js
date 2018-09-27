@@ -9,6 +9,7 @@ const UserTab = () => import('@/page/user/Tab')
 const AdminTab = () => import('@/page/admin/adminTab')
 const Audited = () => import('@/page/admin/Audited')
 const Account = () => import('@/page/admin/Account')
+const Review = () => import('@/page/admin/Review')
 const NewAccount = () => import('@/page/admin/NewAccount')
 const ModifyAccount = () => import('@/page/admin/ModifyAccount')
 const PendingReview = () => import('@/page/admin/PendingReview')
@@ -37,11 +38,6 @@ export default [
         meta: {
           title: '商品添加页',
           needLogin: 'true'
-        },
-        // 路由导航 进入之前
-        beforeEnter: (to, from, next) => {
-          // ...
-          next()
         }
       },
       {
@@ -53,7 +49,7 @@ export default [
         }
       },
       {
-        path: '/edit/:id',
+        path: '/edit',
         props: true,
         name: 'edit',
         component: Edit,
@@ -91,6 +87,15 @@ export default [
         }
       },
       {
+        name: 'Review',
+        path: '/Review',
+        component: Review,
+        meta: {
+          needLogin: 'true',
+          admin: 'true'
+        }
+      },
+      {
         name: 'ModifyAccount',
         path: '/ModifyAccount',
         component: ModifyAccount,
@@ -111,11 +116,11 @@ export default [
       {
         name: 'Audited',
         path: '/Audited',
-        component: Audited
-        // meta: {
-        //   needLogin: 'true',
-        //   admin: 'true'
-        // }
+        component: Audited,
+        meta: {
+          needLogin: 'true',
+          admin: 'true'
+        }
       }
     ]
   },

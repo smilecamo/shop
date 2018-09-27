@@ -1,13 +1,20 @@
 <template>
   <div class="add-content">
-    <span class="content-header">{{$t('user.add')}}</span>
+    <span class="content-header">
+      <Icon type="ios-arrow-dropleft-circle" @click="back"/>
+      商品审核页
+    </span>
     <Divider dashed />
     <Edit></Edit>
+    <div>
     <Button
       type="primary"
-      @click=handle
       style="width: 50%,margin: 0 auto"
-      >{{$t('submit')}}</Button>
+      >审核通过</Button>
+    <Button
+      type="error"
+      style="width: 50%,margin: 0 auto"
+      >审核不通过</Button></div>
   <router-view />
   </div>
 </template>
@@ -30,19 +37,25 @@ export default {
     this.$store.state.content = ''
     this.$store.state.file = ''
     this.$store.state.imgList = []
+    console.log(this.$route.params.name.role)
+    console.log(this.$route.params.name.userName)
   },
   methods: {
     handle () {
       console.log(this.$store.state.name)
       console.log(this.$store.state.price)
+      console.log(this.$store.state.current)
       console.log(this.$store.state.sort)
       console.log(this.$store.state.brand)
       console.log(this.$store.state.supplier)
       console.log(this.$store.state.abstract)
       console.log(this.$store.state.details)
       console.log(this.$store.state.content)
-      console.log(this.$store.state.file, this.$store.state.imgList)
+      console.log(this.$store.state.file)
       console.log(this.$store.state.imgList)
+    },
+    back () {
+      this.$router.go(-1)
     }
   },
   data () {

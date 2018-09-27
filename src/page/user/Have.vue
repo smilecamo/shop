@@ -63,10 +63,16 @@ export default {
                 },
                 on: {
                   click: () => {
-                    let id = params.row.name
-                    this.$store.commit('name', id)
-                    this.$router.push({path: `/edit/${id}`})
-                    // console.log(this.$route)
+                    let img = [
+                      {
+                        id: 1,
+                        name: 'zzz',
+                        url: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4056687946,2460418786&fm=27&gp=0.jpg'
+                      }
+                    ]
+                    this.$store.commit('name', params.row.name)
+                    this.$store.commit('imgList', img)
+                    this.$router.push({path: `/edit`})
                   }
                 }
               }, 'edit'),

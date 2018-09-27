@@ -40,43 +40,41 @@ export default {
         {
           title: '商品名称',
           key: 'userName',
-          sortable: true,
           tooltip: true
         },
         {
           title: '分类名称',
           key: 'role',
-          sortable: true,
           tooltip: true
         },
         {
           title: '品牌名称',
           key: 'role',
-          sortable: true,
           tooltip: true
         },
         {
           title: '供应商',
           key: 'role',
-          sortable: true,
           tooltip: true
         },
         {
           title: '原价',
           key: 'role',
-          sortable: true,
           tooltip: true
         },
         {
           title: '当前价',
           key: 'role',
-          sortable: true,
           tooltip: true
         },
         {
           title: '会员价',
           key: 'role',
-          sortable: true,
+          tooltip: true
+        },
+        {
+          title: '审核时间',
+          key: 'role',
           tooltip: true
         },
         {

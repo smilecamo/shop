@@ -2,9 +2,9 @@
   <div class="add-content">
     <span class="content-header">{{$t('user.edit')}}</span>
     <Divider dashed />
-    <Edit :name='name' :show='show'></Edit>
+    <Edit></Edit>
     <router-view></router-view>
-    <Button type="primary">{{$t('submit')}}</Button>
+    <Button type="primary" @click="add">{{$t('submit')}}</Button>
   </div>
 </template>
 
@@ -23,14 +23,10 @@ export default {
   components: {
     Edit
   },
-  data () {
-    return {
-      name: '',
-      show: false
+  methods: {
+    add () {
+      console.log(this.$store.state.imgList)
     }
-  },
-  created () {
-    this.name = this.$route.params.id
   }
 }
 </script>

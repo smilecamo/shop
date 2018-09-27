@@ -96,10 +96,10 @@ export default {
                 },
                 on: {
                   click: () => {
-                    console.log(params.row.userName)
+                    this.$router.push({name: 'Review', params: { name: params.row }})
                   }
                 }
-              }, 'View'),
+              }, '审核'),
               h('Button', {
                 props: {
                   type: 'error',

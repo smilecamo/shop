@@ -5,8 +5,6 @@ import Store from 'store'
 import axios from 'axios'
 import qs from 'qs'
 import VueI18n from 'vue-i18n'
-import ImgInputer from 'vue-img-inputer'
-import 'vue-img-inputer/dist/index.css'
 import App from './App'
 import router from './router'
 import createStore from './store/store'
@@ -14,12 +12,7 @@ import './common/view.js'
 import './common/VueQuillEditor.js'
 import langEN from './common/lang/en.js'
 import langUS from './common/lang/us.js'
-// 图片上传
-const VueUploadComponent = require('vue-upload-component')
-Vue.component('file-upload', VueUploadComponent)
 Vue.use(VueI18n)
-// 图片设置
-Vue.component('ImgInputer', ImgInputer)
 // 语言设置
 if (localStorage.getItem(`language`)) {
   let reg = new RegExp('"', 'g')

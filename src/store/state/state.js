@@ -1,33 +1,46 @@
 export default {
+  // 语言:默认英文
   language: 'US',
+  // 商品名称
   name: '',
+  // 受否展示会员价等
   show: false,
+  // 价格
   price: '',
+  // 当前价
   current: '',
+  // 分类
   sort: '',
+  // 分类列表
   sortList: [],
+  // 品牌
   brand: '',
+  // 品牌列表
   brandList: [],
+  file: '',
+  // 供应商
   supplier: '',
+  // 商品简介
   abstract: '',
+  // 商品缩略图
   details: '',
+  // 商品详情
   content: '',
-  files: [],
+  // 商品图集
   imgList: [{
-    id: 0,
-    img: 'http://qcloud.dpfile.com/pc/KjFfLjehY_rxYsTKWMXw1DB45lVzB5g5DRNDuPrjOXrlYqSWmqjIiwl9I5e8aYsJjoJrvItByyS4HHaWdXyO_DrXIaWutJls2xCVbatkhjUNNiIYVnHvzugZCuBITtvjski7YaLlHpkrQUr5euoQrg.jpg'
-  },
-  {
     id: 1,
-    img: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=178967214,836900905&fm=26&gp=0.jpg'
+    name: 'zzz',
+    url: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4056687946,2460418786&fm=27&gp=0.jpg'
   },
   {
     id: 2,
-    img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537867223853&di=5a516ba7aaebfd2c57c21c9b592f97be&imgtype=0&src=http%3A%2F%2Fimg5q.duitang.com%2Fuploads%2Fitem%2F201404%2F20%2F20140420103527_ZtC8i.jpeg'
+    name: 'sad',
+    url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=425951740,1872938989&fm=27&gp=0.jpg'
   },
   {
     id: 3,
-    img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537867223851&di=26d28f47d13c5741822b82d49c623362&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201412%2F12%2F20141212184110_x8wsw.jpeg'
+    name: 'sad',
+    url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=425951740,1872938989&fm=27&gp=0.jpg'
   }
   ]
 }

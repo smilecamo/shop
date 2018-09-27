@@ -35,36 +35,38 @@
         </quill-editor>
       </FormItem>
       <FormItem :label="$t('shop.thumbnail')">
-        <img-inputer
+        <!-- <img-inputer
         auto-uoload=false
         v-model="file"
         theme="light"
         img-src='https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1537423892&di=6575bd863508da7588ce34e5af953b97&src=http://shuo.weiweiqi.com/wp-content/uploads/2017/08/tutu06.jpg'
-        size="small"/>
+        size="small"/> -->
       </FormItem>
       <FormItem label="图集">
-        <span style="margin: 0 10px">
-          <img-inputer
-          ref="image"
-          auto-uoload=false
-          v-model="files"
-          theme="light"
-          size="small"
-          />
-          <Button>删除</Button>
-        </span>
-        <span style="margin: 0 10px">
-          <img-inputer
-          ref="image1"
-          auto-uoload=false
-          v-model="bas"
-          theme="light"
-          size="small"
-          />
-          <Button>删除</Button>
-        </span>
+        <div class="demo-upload-list" v-for="item in imgList" :key="item.id">
+          <div v-if="item.status === 'finished'">
+            <img :src="item.url">
+            <div class="demo-upload-list-cover">
+              <Icon type="ios-trash-outline" @click.native="handleRemove(item.id)"></Icon>
+            </div>
+          </div>
+        </div>
+        <Upload
+          ref="upload"
+          action="/api/list"
+          :show-upload-list="false"
+          :default-file-list="imgList"
+          :before-upload = 'uploadBefore'
+          :on-success='uploadSucess'
+          :on-error='uploadError'
+          :max-size="2048"
+          :accept='Accept'
+          style="width:58px; cursor: pointer">
+          <div style="width: 160px;height: 100px; border: 1px dotted #000;line-height: 100px;border-radius:10px;text-align:center">
+            <Icon type="ios-camera" size="40"></Icon>
+          </div>
+        </Upload>
       </FormItem>
-      <Button @click="imgs">aaa</Button>
     </Form>
   </div>
 </template>
@@ -186,23 +188,42 @@ export default {
       })
   },
   methods: {
-    imgChange () {
-      console.log(this)
+    // 移除当前图片
+    handleRemove (file) {
+      // const fileList = this.$refs.upload.fileList
+      // this.$refs.upload.fileList.splice(fileList.indexOf(file), 1)
+      console.log(file)
     },
-    imgs () {
-      const base64 = this.$refs.image.$el.querySelector('.img-inputer__preview-img').src
-      const base641 = this.$refs.image1.$el.querySelector('.img-inputer__preview-img').src
-      const base642 = this.$refs.image2.$el.querySelector('.img-inputer__preview-img').src
-      console.log(base64, base641, base642)
+    // 上传之前判断是否大于定义的数量
+    uploadBefore () {
+      if (this.defaultList.length >= 4) {
+        this.$Message.error('超出上传文件最大的上传数量')
+        return false
+      }
+    },
+    // 上传成功
+    uploadSucess () {
+      this.$Message.success('成功')
+    },
+    uploadError () {
+      this.$Message.error('上传失败')
     }
   },
   data () {
     return {
+      // 控制管理员和用户显示会员价
       shows: this.$store.show,
+      // 分类列表
       sortList: [],
       files: '',
       bas: '',
+      // 品牌列表
       brandList: [],
+      // 图片类型限制
+      Accept: '.jpg, .png,.jpeg',
+      // 已存在图片地址
+      defaultList: [],
+      // 文本编辑器设置
       editorOption: {
         modules: {
           toolbar: [
@@ -218,3 +239,44 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.demo-upload-list{
+  display: inline-block;
+  width: 160px;
+  height: 100px;
+  text-align: center;
+  line-height: 60px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 1px 1px rgba(0,0,0,.2);
+  margin-right: 20px;
+}
+.demo-upload-list img{
+  width: 100%;
+  height: 100%;
+}
+.demo-upload-list-cover{
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 50px;
+  background: rgba(0,0,0,.6);
+}
+.demo-upload-list:hover .demo-upload-list-cover{
+  display: block;
+}
+.demo-upload-list-cover i{
+  color: #fff;
+  font-size: 40px;
+  line-height: 100px;
+  cursor: pointer;
+  margin: 0 2px;
+  }
+</style>

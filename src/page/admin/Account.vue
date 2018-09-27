@@ -8,6 +8,7 @@
     :loading="loading"
     :columns="brandHeader"
     :data="data1"
+    :formatter='role'
     @on-selection-change="selection"
     ></Table>
     <div class="pages">
@@ -58,7 +59,17 @@ export default {
           title: '权限',
           key: 'role',
           sortable: true,
-          tooltip: true
+          tooltip: true,
+          render: (h, params) => {
+            let texts = ''
+            if (params.row.role === 0) {
+              texts = '用户'
+            } else if (params.row.role === 1) {
+              texts = '管理员'
+            }
+            return h('div', {
+            }, texts)
+          }
         },
         {
           title: '操作',
@@ -166,7 +177,6 @@ export default {
         .then((res) => {
           this.loading = false
           let list = res.data.data
-          console.log(list)
           this.dataCount = list.totalCount
           this.pageSize = 20
           this.data1 = list.list
@@ -174,6 +184,10 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    // 转换数据
+    role (val) {
+      console.log(val, 45)
     },
     // 选中的数据
     selection (selection) {
