@@ -1,14 +1,6 @@
 <template>
-  <div class="Setting">
-    <Form :label-width="80" width='320' inline>
-    <FormItem :label="$t('header.language')">
-      <Select v-model="language" style="width:100px" @on-change='changeLang'>
-        <Option value="en-US">en-US</Option>
-        <Option value="zh-CN">zh-CN</Option>
-      </Select>
-    </FormItem>
-    <Button @click='quit'>{{$t('header.quit')}}</Button>
-    </Form>
+  <div class="connet">
+
   </div>
 </template>
 
@@ -37,11 +29,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.connet{
+  width 1240px
+  margin 0 auto
+}
 .Setting{
-  width 400px
-  height 60px
-  position absolute
-  right 30px
-  top 20px
+  float right
 }
 </style>

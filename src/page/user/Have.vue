@@ -53,13 +53,16 @@ export default {
           align: 'center',
           render: (h, params) => {
             return h('div', [
-              h('Button', {
+              h('Icon', {
                 props: {
-                  type: 'primary',
-                  size: 'small'
+                  type: 'md-create'
                 },
                 style: {
-                  marginRight: '5px'
+                  marginRight: '10px',
+                  fontSize: '24px',
+                  color: '#2d8cf0',
+                  padding: '0 10px',
+                  cursor: 'pointer'
                 },
                 on: {
                   click: () => {
@@ -76,17 +79,23 @@ export default {
                   }
                 }
               }, 'edit'),
-              h('Button', {
+              h('Icon', {
                 props: {
-                  type: 'error',
-                  size: 'small'
+                  type: 'md-trash'
+                },
+                style: {
+                  marginRight: '5px',
+                  fontSize: '24px',
+                  color: 'red',
+                  padding: '0 5px',
+                  cursor: 'pointer'
                 },
                 on: {
                   click: () => {
                     // console.log(params.row.name)
                   }
                 }
-              }, 'Delete')
+              }, '')
             ])
           }
         }

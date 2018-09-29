@@ -2,6 +2,7 @@ import Vue from 'vue'
 import 'iview/dist/styles/iview.css'
 import {
   Button,
+  ButtonGroup,
   Table,
   Input,
   RadioGroup,
@@ -27,6 +28,7 @@ import {
   BackTop
 } from 'iview'
 Vue.component('Button', Button)
+Vue.component('ButtonGroup', ButtonGroup)
 Vue.component('Table', Table)
 Vue.component('Input', Input)
 Vue.component('Radio', Radio)

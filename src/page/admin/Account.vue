@@ -3,13 +3,13 @@
     <span class="content-header">{{$t('admin.existing')}}</span>
     <Divider dashed />
     <Table
-    border
-    ref="selection"
-    :loading="loading"
-    :columns="brandHeader"
-    :data="data1"
-    :formatter='role'
-    @on-selection-change="selection"
+      border
+      ref="selection"
+      :loading="loading"
+      :columns="brandHeader"
+      :data="data1"
+      :formatter='role'
+      @on-selection-change="selection"
     ></Table>
     <div class="pages">
     <Page

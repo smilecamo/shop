@@ -1,16 +1,51 @@
 <template>
   <div>
-    <header>weibu</header>
+    <header>
+      <div class="connet">
+      <div class="Setting">
+      <Form :label-width="80" width='320' inline>
+      <FormItem :label="$t('header.language')">
+        <Select v-model="language" style="width:100px" @on-change='changeLang'>
+          <Option value="en-US">en-US</Option>
+          <Option value="zh-CN">zh-CN</Option>
+        </Select>
+      </FormItem>
+      <Button @click='quit'>
+        <!-- {{$t('header.quit')}} -->
+        <Icon type="md-power" size='20'/>
+      </Button>
+      </Form>
+    </div>
+    </div>
+    </header>
   </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      language: 'en-US'
+    }
+  },
+  created () {
+    this.language = this.$Stores.get('language')
+  },
+  methods: {
+    changeLang (value) {
+      this.$Stores.set('language', value)
+      this.$router.go()
+    },
+    quit () {
+      sessionStorage.clear()
+      this.$Message.success('quit')
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
 header{
   background: #ccc;
   width: 100%;
@@ -18,5 +53,12 @@ header{
   text-align: center;
   line-height: 50px;
   font-size: 64px;
+}
+.connet{
+  width 1240px
+  margin 0 auto
+}
+.Setting{
+  float right
 }
 </style>
