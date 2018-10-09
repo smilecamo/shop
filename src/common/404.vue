@@ -5,10 +5,10 @@
   <canvas class="snow" id="snow" width="1349" height="600"></canvas>
   <div class="main-text">
     <h1>404</h1>
-    <div class="main-text-a">
-      <router-link to="/login">HOME</router-link>
-      <a @click="back" style="font-size: 26px">return</a>
-    </div>
+    <ButtonGroup size="large" shape="circle">
+        <Button to="/login">HOME</Button>
+        <Button @click="back">return</Button>
+    </ButtonGroup>
   </div>
   <div class="ground">
     <div class="mound">
@@ -149,8 +149,8 @@ export default {
   font-size: 5vh;
 }
 .main-text h1 {
-  font-size:45px;
-  line-height:48px;
+  font-size:260px;
+  line-height:280px;
   margin:0;
   padding:0;}
 .main-text-a{

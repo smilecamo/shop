@@ -26,6 +26,9 @@ export default {
   details (state, message) {
     state.details = message
   },
+  thumbnail (state, message) {
+    state.thumbnail = message
+  },
   content (state, message) {
     state.content = message
   },

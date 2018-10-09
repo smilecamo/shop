@@ -35,12 +35,27 @@
         </quill-editor>
       </FormItem>
       <FormItem :label="$t('shop.thumbnail')">
-        <!-- <img-inputer
-        auto-uoload=false
-        v-model="file"
-        theme="light"
-        img-src='https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1537423892&di=6575bd863508da7588ce34e5af953b97&src=http://shuo.weiweiqi.com/wp-content/uploads/2017/08/tutu06.jpg'
-        size="small"/> -->
+        <div class="demo-upload-list" v-for="item in thumbnail" :key="item.id">
+            <img :src="item.url">
+            <div class="demo-upload-list-cover">
+              <Icon type="ios-trash-outline" @click.native="handleThumbnailRemove(item.id)"></Icon>
+            </div>
+        </div>
+        <Upload
+          ref="upload"
+          action="/api/list"
+          :show-upload-list="false"
+          :default-file-list="thumbnail"
+          :before-upload = 'uploadThumbnailBefore'
+          :on-success='uploadThumbnailSucess'
+          :on-error='uploadThumbnailError'
+          :max-size="2048"
+          :accept='Accept'
+          style="width:58px; cursor: pointer">
+          <div style="width: 160px;height: 100px; border: 1px dotted #000;line-height: 100px;border-radius:10px;text-align:center">
+            <Icon type="ios-camera" size="40"></Icon>
+          </div>
+        </Upload>
       </FormItem>
       <FormItem label="图集">
         <div class="demo-upload-list" v-for="item in imgList" :key="item.id">
@@ -143,6 +158,14 @@ export default {
         this.$store.commit('details', value)
       }
     },
+    thumbnail: {
+      get () {
+        return this.$store.state.thumbnail
+      },
+      set (value) {
+        this.$store.commit('thumbnail', value)
+      }
+    },
     content: {
       get () {
         return this.$store.state.content
@@ -188,6 +211,7 @@ export default {
       })
   },
   methods: {
+    // *********多张
     // 移除当前图片
     handleRemove (file) {
       // const fileList = this.$refs.upload.fileList
@@ -196,7 +220,7 @@ export default {
     },
     // 上传之前判断是否大于定义的数量
     uploadBefore () {
-      if (this.defaultList.length >= 4) {
+      if (this.imgList.length >= 2) {
         this.$Message.error('超出上传文件最大的上传数量')
         return false
       }
@@ -206,6 +230,32 @@ export default {
       this.$Message.success('成功')
     },
     uploadError () {
+      this.$Message.error('上传失败')
+    },
+    // *********单张
+    // 移除当前图片
+    handleThumbnailRemove (file) {
+      // const fileList = this.$refs.upload.fileList
+      // this.$refs.upload.fileList.splice(fileList.indexOf(file), 1)
+      console.log(file)
+    },
+    // 上传之前判断是否大于定义的数量
+    uploadThumbnailBefore () {
+      if (this.thumbnail.length >= 1) {
+        this.$Message.error('超出上传文件最大的上传数量')
+        return false
+      }
+    },
+    // 上传成功
+    uploadThumbnailSucess () {
+      this.$Message.success('成功')
+      this.$store.commit('thumbnail', [{
+        id: 2,
+        name: 'sad',
+        url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=425951740,1872938989&fm=27&gp=0.jpg'
+      }])
+    },
+    uploadThumbnailError () {
       this.$Message.error('上传失败')
     }
   },
@@ -221,8 +271,6 @@ export default {
       brandList: [],
       // 图片类型限制
       Accept: '.jpg, .png,.jpeg',
-      // 已存在图片地址
-      defaultList: [],
       // 文本编辑器设置
       editorOption: {
         modules: {

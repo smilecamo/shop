@@ -27,6 +27,7 @@ export default {
     this.$store.state.supplier = ''
     this.$store.state.abstract = ''
     this.$store.state.details = ''
+    this.$store.state.thumbnail = []
     this.$store.state.content = ''
     this.$store.state.file = ''
     this.$store.state.imgList = []

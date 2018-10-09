@@ -1,6 +1,5 @@
 <template>
   <div class="connet">
-
   </div>
 </template>
 

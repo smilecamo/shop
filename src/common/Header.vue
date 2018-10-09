@@ -2,9 +2,10 @@
   <div>
     <header>
       <div class="connet">
+        toubu
       <div class="Setting">
       <Form :label-width="80" width='320' inline>
-      <FormItem :label="$t('header.language')">
+      <FormItem :label="$t('header.language')" style="margin-top: 14px">
         <Select v-model="language" style="width:100px" @on-change='changeLang'>
           <Option value="en-US">en-US</Option>
           <Option value="zh-CN">zh-CN</Option>

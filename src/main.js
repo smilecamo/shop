@@ -44,12 +44,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-router.beforeResolve((to, from, next) => {
-  next()
-})
-router.afterEach((to, from) => {
-
-})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
