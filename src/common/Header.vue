@@ -50,10 +50,10 @@ export default {
 header{
   background: #ccc;
   width: 100%;
-  height: 50px;
+  height: 60px;
   text-align: center;
   line-height: 50px;
-  font-size: 64px;
+  font-size: 48px;
 }
 .connet{
   width 1240px

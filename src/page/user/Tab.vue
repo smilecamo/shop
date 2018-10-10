@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content-div">
     <header-tab/>
     <Language />
     <Row class="content">
@@ -22,7 +22,7 @@
       <router-view/>
       </Col>
     </Row>
-    <footer-tab/>
+    <footer-tab class="footer"/>
   </div>
 </template>
 
@@ -44,8 +44,18 @@ export default {
 </script>
 
 <style scoped>
+.content-div{
+  position: relative;
+  min-height: 100%;
+}
 .content {
   width: 1240px;
   margin: 20px auto;
+}
+.footer{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -150px;
 }
 </style>
