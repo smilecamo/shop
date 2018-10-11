@@ -19,6 +19,7 @@ export default {
         {
           type: 'selection',
           width: 60,
+          key: 'id',
           align: 'center'
         },
         {
@@ -28,22 +29,22 @@ export default {
         },
         {
           title: this.$t('shop.sort'),
-          key: 'age',
+          key: 'cate',
           tooltip: true
         },
         {
           title: this.$t('shop.brand'),
-          key: 'address',
+          key: 'brand',
           tooltip: true
         },
         {
           title: this.$t('shop.supplier'),
-          key: 'address',
+          key: 'supplier',
           tooltip: true
         },
         {
           title: this.$t('shop.cost'),
-          key: 'address',
+          key: 'origin_price',
           tooltip: true
         },
         {
@@ -75,7 +76,8 @@ export default {
                         url: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4056687946,2460418786&fm=27&gp=0.jpg'
                       }
                     ]
-                    this.$store.commit('name', params.row.name)
+                    console.log(params.row.id)
+                    this.$store.commit('name', params.row.id)
                     this.$store.commit('imgList', img)
                     this.$router.push({path: `/edit`})
                   }
@@ -102,145 +104,39 @@ export default {
           }
         }
       ],
-      data1: [
-        {
-          name: 'John Brown',
-          age: 18,
-          address: 'New York No. 1 Lake Park',
-          date: '2016-10-03'
-        },
-        {
-          name: 'Jim Green',
-          age: 24,
-          address: 'London No. 1 Lake Park',
-          date: '2016-10-01'
-        },
-        {
-          name: 'Joe Black',
-          age: 30,
-          address: 'Sydney No. 1 Lake Park',
-          date: '2016-10-02'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        }
-      ]
+      data1: []
     }
   },
   mounted () {
-    this.$axios.get('/api/merchandise/brand/list')
-      .then((res) => {
-        console.log(res)
+    this.list()
+  },
+  methods: {
+    list () {
+      this.$axios({
+        method: 'POST',
+        url: '/api/merchandise/commodity/getCommodity',
+        data: {
+          'id': null,
+          'name': null,
+          'cateName': null,
+          'brandName': null,
+          'startDate': null,
+          'endDate': null,
+          'currentPage': 1,
+          'pageSize': 20
+        }
       })
-      .catch(function (error) {
-        console.log(error)
-      })
+        .then((res) => {
+          console.log(res.data)
+          this.data1 = res.data.data.list
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$Message.error('接口报错')
+        })
+    }
   }
+
 }
 </script>
 

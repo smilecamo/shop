@@ -23,6 +23,8 @@ export default {
   components: {
     Edit
   },
+  created () {
+  },
   methods: {
     add () {
       console.log(this.$store.state.imgList)
