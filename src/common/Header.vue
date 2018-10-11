@@ -13,7 +13,7 @@
       </FormItem>
       <Button @click='quit'>
         <!-- {{$t('header.quit')}} -->
-        <Icon type="md-power" size='20'/>
+        <Icon type="md-power" size='20' color='red'/>
       </Button>
       </Form>
     </div>

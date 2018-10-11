@@ -66,6 +66,8 @@ export default {
                 },
                 on: {
                   click: () => {
+                    // 不显示当前价和商品名称2
+                    this.$store.commit('show', false)
                     let img = [
                       {
                         id: 1,
@@ -92,7 +94,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    // console.log(params.row.name)
+                    console.log(params.row.name)
                   }
                 }
               }, '')

@@ -37,8 +37,8 @@ export default {
     this.$store.state.content = ''
     this.$store.state.file = ''
     this.$store.state.imgList = []
-    console.log(this.$route.params.name.role)
-    console.log(this.$route.params.name.userName)
+    // console.log(this.$route.params.name.role)
+    // console.log(this.$route.params.name.userName)
   },
   methods: {
     handle () {

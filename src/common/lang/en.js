@@ -2,6 +2,7 @@ module.exports = {
   submit: 'submit',
   shop: {
     name: '商品名称',
+    name1: '商品名称1',
     cost: '成本价',
     price: '当前价',
     sort: '分类',

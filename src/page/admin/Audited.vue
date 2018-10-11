@@ -97,7 +97,8 @@ export default {
                 },
                 on: {
                   click: () => {
-                    console.log(params.row.userName)
+                    this.$store.commit('show', true)
+                    this.$router.push({name: 'Review', params: { name: params.row }})
                   }
                 }
               }, ''),
@@ -114,8 +115,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.delUser(params.row.id)
-                    console.log(params.row.id)
+                    this.$Message.success('success')
                   }
                 }
               }, '')

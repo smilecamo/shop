@@ -3,6 +3,8 @@ export default {
   language: 'US',
   // 商品名称
   name: '',
+  // 商品名称
+  name1: '',
   // 受否展示会员价等
   show: false,
   // 价格

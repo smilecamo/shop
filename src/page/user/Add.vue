@@ -19,18 +19,19 @@ export default {
     Edit
   },
   created () {
-    this.$store.state.name = ''
-    this.$store.state.price = ''
-    this.$store.state.current = ''
-    this.$store.state.sort = ''
-    this.$store.state.brand = ''
-    this.$store.state.supplier = ''
-    this.$store.state.abstract = ''
-    this.$store.state.details = ''
-    this.$store.state.thumbnail = []
-    this.$store.state.content = ''
-    this.$store.state.file = ''
-    this.$store.state.imgList = []
+    this.$store.commit('show', false)
+    this.$store.commit('name', '')
+    this.$store.commit('price', '')
+    this.$store.commit('current', '')
+    this.$store.commit('sort', '')
+    this.$store.commit('brand', '')
+    this.$store.commit('supplier', '')
+    this.$store.commit('abstract', '')
+    this.$store.commit('details', '')
+    this.$store.commit('thumbnail', [])
+    this.$store.commit('content', '')
+    this.$store.commit('file', '')
+    this.$store.commit('imgList', [])
   },
   methods: {
     handle () {

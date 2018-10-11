@@ -2,6 +2,7 @@ module.exports = {
   submit: 'submit',
   shop: {
     name: 'Name',
+    name1: 'Name1',
     sort: 'Sort',
     cost: 'Cost Price',
     price: 'Current Price',

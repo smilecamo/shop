@@ -99,6 +99,8 @@ export default {
                 },
                 on: {
                   click: () => {
+                    // 显示当前价和商品名称2
+                    this.$store.commit('show', true)
                     this.$router.push({name: 'Review', params: { name: params.row }})
                   }
                 }
@@ -116,8 +118,9 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.delUser(params.row.id)
-                    console.log(params.row.id)
+                    // this.delUser(params.row.id)
+                    // this.$Message.success(params.row.id)
+                    this.$Message.success('success')
                   }
                 }
               }, '')

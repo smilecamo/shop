@@ -2,6 +2,9 @@ export default {
   name (state, message) {
     state.name = message
   },
+  name1 (state, message) {
+    state.name1 = message
+  },
   price (state, message) {
     state.price = message
   },

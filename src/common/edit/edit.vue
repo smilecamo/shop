@@ -4,10 +4,13 @@
       <FormItem :label="$t('shop.name')">
         <Input v-model="name" placeholder="请输入商品名称"/>
       </FormItem>
+      <FormItem :label="$t('shop.name1')" v-show="show">
+        <Input v-model="name1" placeholder="请输入商品名称"/>
+      </FormItem>
       <FormItem :label="$t('shop.cost')">
         <Input v-model="price" placeholder="请输入成本价" />
       </FormItem>
-      <FormItem :label="$t('shop.price')" v-show="shows">
+      <FormItem :label="$t('shop.price')" v-show="show">
         <Input v-model="current" placeholder="请输入当前价" />
       </FormItem>
       <FormItem :label="$t('shop.sort')">
@@ -100,6 +103,19 @@ export default {
       },
       set (value) {
         this.$store.commit('name', value)
+      }
+    },
+    name1: {
+      get () {
+        return this.$store.state.name1
+      },
+      set (value) {
+        this.$store.commit('name1', value)
+      }
+    },
+    show: {
+      get () {
+        return this.$store.state.show
       }
     },
     price: {
@@ -262,7 +278,6 @@ export default {
   data () {
     return {
       // 控制管理员和用户显示会员价
-      shows: this.$store.show,
       // 分类列表
       sortList: [],
       files: '',
