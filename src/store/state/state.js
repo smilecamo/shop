@@ -1,6 +1,7 @@
 export default {
   // 语言:默认英文
   language: 'US',
+  shopId: '',
   // 商品名称
   name: '',
   // 商品名称
@@ -21,28 +22,23 @@ export default {
   brandList: [],
   file: '',
   // 供应商
-  supplier: '',
+  supplier: [
+    {
+      id: 1,
+      name: 'kingstar auto'
+    },
+    {
+      id: 2,
+      name: '1000online'
+    }
+  ],
   // 商品简介
   abstract: '',
   // 商品详情
   details: '',
   // 商品缩略图
-  thumbnail: [{
-    id: 9,
-    name: 'zzz',
-    url: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4056687946,2460418786&fm=27&gp=0.jpg'
-  }],
+  thumbnail: '',
   content: '',
   // 商品图集
-  imgList: [{
-    id: 1,
-    name: 'zzz',
-    url: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4056687946,2460418786&fm=27&gp=0.jpg'
-  },
-  {
-    id: 2,
-    name: 'sad',
-    url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=425951740,1872938989&fm=27&gp=0.jpg'
-  }
-  ]
+  imgList: []
 }

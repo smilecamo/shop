@@ -4,7 +4,7 @@
     <Divider dashed />
     <Edit></Edit>
     <router-view></router-view>
-    <Button type="primary" @click="add">{{$t('submit')}}</Button>
+    <Button type="primary">{{$t('submit')}}</Button>
   </div>
 </template>
 
@@ -23,11 +23,35 @@ export default {
   components: {
     Edit
   },
-  created () {
+  mounted () {
+    this.shopDeatil(this.$store.state.shopId)
   },
   methods: {
-    add () {
-      console.log(this.$store.state.imgList)
+    shopDeatil (id) {
+      this.$axios({
+        method: 'GET',
+        url: '/api/merchandise/commodity/quyCommodity',
+        params: {
+          'id': id
+        }
+      })
+        .then((res) => {
+          console.log(res.data.data.supplier)
+          this.$store.state.shopId = res.data.data.id
+          this.$store.commit('name', res.data.data.name)
+          this.$store.commit('price', res.data.data.current_price)
+          this.$store.commit('sort', res.data.data.cate_id)
+          this.$store.commit('brand', res.data.data.brand_id)
+          this.$store.commit('supplier', res.data.data.supplier)
+          this.$store.commit('abstract', res.data.data.brief)
+          this.$store.commit('thumbnail', res.data.data.icon)
+          this.$store.commit('content', res.data.data.description)
+          this.$store.commit('imgList', res.data.data.atlass)
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$Message.error('接口报错')
+        })
     }
   }
 }

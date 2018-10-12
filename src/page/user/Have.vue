@@ -69,16 +69,7 @@ export default {
                   click: () => {
                     // 不显示当前价和商品名称2
                     this.$store.commit('show', false)
-                    let img = [
-                      {
-                        id: 1,
-                        name: 'zzz',
-                        url: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4056687946,2460418786&fm=27&gp=0.jpg'
-                      }
-                    ]
-                    console.log(params.row.id)
-                    this.$store.commit('name', params.row.id)
-                    this.$store.commit('imgList', img)
+                    this.$store.commit('shopId', params.row.id)
                     this.$router.push({path: `/edit`})
                   }
                 }

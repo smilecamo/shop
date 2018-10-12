@@ -8,26 +8,24 @@
         <Input v-model="name1" placeholder="请输入商品名称"/>
       </FormItem>
       <FormItem :label="$t('shop.cost')">
-        <Input v-model="price" placeholder="请输入成本价" />
+        <Input v-model="price" placeholder="请输入成本价"/>
       </FormItem>
       <FormItem :label="$t('shop.price')" v-show="show">
-        <Input v-model="current" placeholder="请输入当前价" />
+        <Input v-model="current" placeholder="请输入当前价"/>
       </FormItem>
       <FormItem :label="$t('shop.sort')">
         <Select v-model="sort">
-          <Option v-for='item in sortList' :key='item.id' :value="item.name">{{item.name}}</Option>
+          <Option v-for='item in sortList' :key='item.id' :value="item.id">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.brand')">
         <Select v-model="brand">
-          <Option v-for='item in brandList' :key='item.id' :value="item.name">{{item.name}}</Option>
+          <Option v-for='item in brandList' :key='item.id' :value="item.id">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.supplier')">
         <Select v-model="supplier">
-          <Option value="beijing">New York</Option>
-          <Option value="shanghai">London</Option>
-          <Option value="shenzhen">Sydney</Option>
+          <Option v-for='item in supplier' :key='item.id' :value="item.id">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.introduction')">
@@ -38,22 +36,25 @@
         </quill-editor>
       </FormItem>
       <FormItem :label="$t('shop.thumbnail')">
-        <div class="demo-upload-list" v-for="item in thumbnail" :key="item.id">
-            <img :src="item.url">
+        <div class="demo-upload-list">
+            <img :src="thumbnail">
             <div class="demo-upload-list-cover">
               <Icon type="ios-trash-outline" @click.native="handleThumbnailRemove(item.id)"></Icon>
             </div>
         </div>
         <Upload
+          name="uploadFile"
           ref="upload"
-          action="/api/list"
+          action="http://47.100.31.2:8083/merchandise/uploadPicture/upload"
+          :header="headers"
           :show-upload-list="false"
           :default-file-list="thumbnail"
           :before-upload = 'uploadThumbnailBefore'
           :on-success='uploadThumbnailSucess'
           :on-error='uploadThumbnailError'
-          :max-size="2048"
+          :max-size="4096"
           :accept='Accept'
+          :with-credentials='true'
           style="width:58px; cursor: pointer">
           <div style="width: 160px;height: 100px; border: 1px dotted #000;line-height: 100px;border-radius:10px;text-align:center">
             <Icon type="ios-camera" size="40"></Icon>
@@ -61,17 +62,18 @@
         </Upload>
       </FormItem>
       <FormItem label="图集">
-        <div class="demo-upload-list" v-for="item in imgList" :key="item.id">
-          <div v-if="item.status === 'finished'">
-            <img :src="item.url">
+        <div class="demo-upload-list" v-for="item in imgList" :key="item.img">
+          <div>
+            <img :src="item.img">
             <div class="demo-upload-list-cover">
               <Icon type="ios-trash-outline" @click.native="handleRemove(item.id)"></Icon>
             </div>
           </div>
         </div>
         <Upload
+          name="uploadFile"
           ref="upload"
-          action="/api/list"
+          action="http://47.100.31.2:8083/merchandise/uploadPicture/upload"
           :show-upload-list="false"
           :default-file-list="imgList"
           :before-upload = 'uploadBefore'
@@ -236,14 +238,18 @@ export default {
     },
     // 上传之前判断是否大于定义的数量
     uploadBefore () {
-      if (this.imgList.length >= 2) {
+      if (this.imgList.length >= 9) {
         this.$Message.error('超出上传文件最大的上传数量')
         return false
       }
     },
     // 上传成功
-    uploadSucess () {
+    uploadSucess (file) {
       this.$Message.success('成功')
+      console.log(file)
+      this.imgLists.push({id: null, deal_id: null, sort: null, img: file.data})
+      console.log(this.imgLists)
+      this.$store.commit('imgList', this.imgLists)
     },
     uploadError () {
       this.$Message.error('上传失败')
@@ -263,16 +269,14 @@ export default {
       }
     },
     // 上传成功
-    uploadThumbnailSucess () {
+    uploadThumbnailSucess (file) {
       this.$Message.success('成功')
-      this.$store.commit('thumbnail', [{
-        id: 2,
-        name: 'sad',
-        url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=425951740,1872938989&fm=27&gp=0.jpg'
-      }])
+      this.$store.commit('thumbnail', file.data)
+      console.log(file)
     },
-    uploadThumbnailError () {
+    uploadThumbnailError (file) {
       this.$Message.error('上传失败')
+      console.log(file)
     }
   },
   data () {
@@ -281,9 +285,13 @@ export default {
       // 分类列表
       sortList: [],
       files: '',
+      imgLists: [],
       bas: '',
       // 品牌列表
       brandList: [],
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
       // 图片类型限制
       Accept: '.jpg, .png,.jpeg',
       // 文本编辑器设置

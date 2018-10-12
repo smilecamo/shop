@@ -25,7 +25,6 @@ export default {
     this.$store.commit('current', '')
     this.$store.commit('sort', '')
     this.$store.commit('brand', '')
-    this.$store.commit('supplier', '')
     this.$store.commit('abstract', '')
     this.$store.commit('details', '')
     this.$store.commit('thumbnail', [])
@@ -41,10 +40,35 @@ export default {
       console.log(this.$store.state.brand)
       console.log(this.$store.state.supplier)
       console.log(this.$store.state.abstract)
-      console.log(this.$store.state.details)
       console.log(this.$store.state.content)
       console.log(this.$store.state.file, this.$store.state.imgList)
       console.log(this.$store.state.imgList)
+      this.$axios({
+        method: 'POST',
+        url: '/api/merchandise/commodity/addCommodity',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        data: {
+          id: null,
+          name: this.$store.state.name,
+          current_price: this.$store.state.price,
+          cate_id: this.$store.state.sort,
+          brand_id: this.$store.state.brand,
+          supplier: this.$store.state.supplier,
+          brief: this.$store.state.abstract,
+          description: this.$store.state.content,
+          icon: this.$store.state.thumbnail,
+          atlass: this.$store.state.imgList
+        }
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$Message.error('接口报错')
+        })
     }
   },
   data () {

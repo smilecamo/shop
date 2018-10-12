@@ -1,4 +1,7 @@
 export default {
+  shopId (state, message) {
+    state.shopId = message
+  },
   name (state, message) {
     state.name = message
   },
