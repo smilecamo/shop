@@ -50,7 +50,6 @@ export default [
       },
       {
         path: '/edit',
-        props: true,
         name: 'edit',
         component: Edit,
         meta: {

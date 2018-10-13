@@ -26,6 +26,9 @@ export default {
   supplier (state, message) {
     state.supplier = message
   },
+  supplierList (state, message) {
+    state.supplierList = message
+  },
   abstract (state, message) {
     state.abstract = message
   },
@@ -34,6 +37,9 @@ export default {
   },
   thumbnail (state, message) {
     state.thumbnail = message
+  },
+  icon (state, message) {
+    state.icon = message
   },
   content (state, message) {
     state.content = message

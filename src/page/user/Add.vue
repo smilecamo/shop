@@ -52,18 +52,23 @@ export default {
         data: {
           id: null,
           name: this.$store.state.name,
-          current_price: this.$store.state.price,
+          origin_price: this.$store.state.price,
           cate_id: this.$store.state.sort,
           brand_id: this.$store.state.brand,
           supplier: this.$store.state.supplier,
           brief: this.$store.state.abstract,
           description: this.$store.state.content,
-          icon: this.$store.state.thumbnail,
+          icon: this.$store.state.icon,
           atlass: this.$store.state.imgList
         }
       })
         .then((res) => {
-          console.log(res)
+          if (res.data.code === 200) {
+            this.$Message.success('success')
+            this.$router.push({path: '/have'})
+          } else {
+            this.$Message.err('err')
+          }
         })
         .catch((err) => {
           console.log(err)

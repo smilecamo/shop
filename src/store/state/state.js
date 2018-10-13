@@ -22,7 +22,8 @@ export default {
   brandList: [],
   file: '',
   // 供应商
-  supplier: [
+  supplier: '1',
+  supplierList: [
     {
       id: 1,
       name: 'kingstar auto'
@@ -37,7 +38,9 @@ export default {
   // 商品详情
   details: '',
   // 商品缩略图
-  thumbnail: '',
+  thumbnail: [],
+  // 商品缩略图添加时使用
+  icon: '',
   content: '',
   // 商品图集
   imgList: []

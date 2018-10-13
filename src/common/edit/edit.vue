@@ -25,7 +25,7 @@
       </FormItem>
       <FormItem :label="$t('shop.supplier')">
         <Select v-model="supplier">
-          <Option v-for='item in supplier' :key='item.id' :value="item.id">{{item.name}}</Option>
+          <Option v-for='item in supplierList' :key='item.id' :value="item.id">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.introduction')">
@@ -36,10 +36,12 @@
         </quill-editor>
       </FormItem>
       <FormItem :label="$t('shop.thumbnail')">
-        <div class="demo-upload-list">
-            <img :src="thumbnail">
+        <div class="demo-upload-list" v-for="item in thumbnail" :key="item.url">
+            <img :src="item.url">
             <div class="demo-upload-list-cover">
-              <Icon type="ios-trash-outline" @click.native="handleThumbnailRemove(item.id)"></Icon>
+              <Icon type="ios-trash-outline"
+              @click.native="handleThumbnailRemove()"
+              ></Icon>
             </div>
         </div>
         <Upload
@@ -160,6 +162,14 @@ export default {
         this.$store.commit('supplier', value)
       }
     },
+    supplierList: {
+      get () {
+        return this.$store.state.supplierList
+      },
+      set (value) {
+        this.$store.commit('supplierList', value)
+      }
+    },
     abstract: {
       get () {
         return this.$store.state.abstract
@@ -232,9 +242,20 @@ export default {
     // *********多张
     // 移除当前图片
     handleRemove (file) {
-      // const fileList = this.$refs.upload.fileList
-      // this.$refs.upload.fileList.splice(fileList.indexOf(file), 1)
       console.log(file)
+      this.$axios({
+        method: 'POST',
+        url: '/api/merchandise/atlas/delAtlas',
+        params: {
+          'id': file
+        }
+      })
+        .then((res) => {
+          alert(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     // 上传之前判断是否大于定义的数量
     uploadBefore () {
@@ -256,10 +277,9 @@ export default {
     },
     // *********单张
     // 移除当前图片
-    handleThumbnailRemove (file) {
-      // const fileList = this.$refs.upload.fileList
-      // this.$refs.upload.fileList.splice(fileList.indexOf(file), 1)
-      console.log(file)
+    handleThumbnailRemove () {
+      this.$store.commit('thumbnail', [])
+      this.$store.commit('icon', '')
     },
     // 上传之前判断是否大于定义的数量
     uploadThumbnailBefore () {
@@ -271,7 +291,11 @@ export default {
     // 上传成功
     uploadThumbnailSucess (file) {
       this.$Message.success('成功')
-      this.$store.commit('thumbnail', file.data)
+      let ads = []
+      let ad = 'url=' + file.data
+      ads.push(this.$qs.parse(ad))
+      this.$store.commit('thumbnail', ads)
+      this.$store.commit('icon', file.data)
       console.log(file)
     },
     uploadThumbnailError (file) {

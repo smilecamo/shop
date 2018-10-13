@@ -68,18 +68,6 @@ export default {
           tooltip: true
         },
         {
-          title: '当前价',
-          key: 'role',
-          sortable: true,
-          tooltip: true
-        },
-        {
-          title: '会员价',
-          key: 'role',
-          sortable: true,
-          tooltip: true
-        },
-        {
           title: '操作',
           key: 'action',
           width: 150,

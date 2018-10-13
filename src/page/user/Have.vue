@@ -2,7 +2,25 @@
   <div class="add-content">
     <span class="content-header">{{$t('user.Already')}}</span>
     <Divider dashed />
-    <Table border ref="selection" :columns="columns4" :data="data1"></Table>
+    <Table
+      border
+      ref="selection"
+      :columns="columns4"
+      @on-selection-change="selection"
+      :data="data1"></Table>
+    <div class="pages">
+    <Page
+    :total="dataCount"
+    :page-size="pageSize"
+    @on-change="changepage"
+    class="page"
+    ></Page>
+    <Button
+    type="error"
+    class="left"
+    @click="delShops"
+    >Delete</Button>
+    </div>
   </div>
 </template>
 
@@ -15,6 +33,9 @@ export default {
   },
   data () {
     return {
+      index: 1,
+      pageSize: 20,
+      dataCount: 0,
       columns4: [
         {
           type: 'selection',
@@ -40,7 +61,16 @@ export default {
         {
           title: this.$t('shop.supplier'),
           key: 'supplier',
-          tooltip: true
+          render: (h, params) => {
+            let texts = ''
+            if (params.row.supplier === 1) {
+              texts = 'kingstar auto'
+            } else if (params.row.supplier === 2) {
+              texts = '1000online'
+            }
+            return h('div', {
+            }, texts)
+          }
         },
         {
           title: this.$t('shop.cost'),
@@ -70,7 +100,7 @@ export default {
                     // 不显示当前价和商品名称2
                     this.$store.commit('show', false)
                     this.$store.commit('shopId', params.row.id)
-                    this.$router.push({path: `/edit`})
+                    this.$router.push({path: '/edit'})
                   }
                 }
               }, 'edit'),
@@ -87,7 +117,8 @@ export default {
                 },
                 on: {
                   click: () => {
-                    console.log(params.row.name)
+                    this.delShop(params.row.id)
+                    console.log(params.row.id)
                   }
                 }
               }, '')
@@ -113,17 +144,75 @@ export default {
           'brandName': null,
           'startDate': null,
           'endDate': null,
-          'currentPage': 1,
-          'pageSize': 20
+          'currentPage': this.index,
+          'pageSize': this.pageSize
         }
       })
         .then((res) => {
           console.log(res.data)
           this.data1 = res.data.data.list
+          this.dataCount = res.data.data.totalCount
         })
         .catch((err) => {
           console.log(err)
           this.$Message.error('接口报错')
+        })
+    },
+    changepage (index) {
+      this.index = index
+      this.list()
+    },
+    // 删除单个商品
+    delShop (id) {
+      this.$axios({
+        method: 'POST',
+        url: '/api/merchandise/commodity/delCommodity',
+        params: {
+          id: id
+        }
+      })
+        .then((res) => {
+          if (res.data.data === null) {
+            this.$Message.success('success')
+            this.list()
+          } else {
+            this.$Message.error('error')
+          }
+        })
+    },
+    // 选中的数据
+    selection (selection) {
+      let arr = []
+      // var tt  = [...new Set([5,5,6,6,8,])]
+      for (let i = 0; i < selection.length; i++) {
+        console.log(selection[i].id)
+        arr.push(selection[i].id)
+        // var set = new Set(arr)
+        // this.arr = Array.from(set)
+      }
+      let tt = [...new Set(arr)]
+      this.arr = tt
+      console.log(this.arr)
+    },
+    // 删除多个商品
+    delShops () {
+      this.$axios({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        url: '/api/merchandise/commodity/delCommoditys',
+        params: {
+          'id': this.arr
+        }
+      })
+        .then((res) => {
+          if (res.data.data === null) {
+            this.$Message.success('success')
+            this.list()
+          } else {
+            this.$Message.error('error')
+          }
         })
     }
   }
@@ -131,11 +220,25 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
 .add-content {
   margin-top: 20px;
 }
 .content-header {
   font-size: 20px;
+}
+.pages{
+  position relative
+  height 50px
+}
+.page{
+  position absolute
+  top 10px
+  right 0
+}
+.left{
+  position absolute
+  top 10px
+  left 0
 }
 </style>
