@@ -8,10 +8,12 @@ export default {
   name1: '',
   // 受否展示会员价等
   show: false,
-  // 价格
+  // 成本价格
   price: '',
   // 当前价
   current: '',
+  // 活动价格
+  activityPrice: '',
   // 分类
   sort: '',
   // 分类列表

@@ -26,55 +26,56 @@ export default {
     return {
       arr: [],
       loading: false,
-      name: '',
-      password: '',
-      Permission: '0',
       index: 1,
       ModifyAccount: false,
       // 设置初始化信息数
-      dataCount: 100,
+      dataCount: 0,
       // 每页显示的数量
       pageSize: 20,
       // 设置表格头部
       brandHeader: [
         {
           title: '商品名称',
-          key: 'userName',
+          key: 'name',
           tooltip: true
         },
         {
           title: '分类名称',
-          key: 'role',
+          key: 'cate',
           tooltip: true
         },
         {
           title: '品牌名称',
-          key: 'role',
+          key: 'brand',
           tooltip: true
         },
         {
           title: '供应商',
-          key: 'role',
-          tooltip: true
+          key: 'supplier',
+          render: (h, params) => {
+            let texts = ''
+            if (params.row.supplier === 1) {
+              texts = 'kingstar auto'
+            } else if (params.row.supplier === 2) {
+              texts = '1000online'
+            }
+            return h('div', {
+            }, texts)
+          }
         },
         {
           title: '原价',
-          key: 'role',
+          key: 'origin_price',
           tooltip: true
         },
         {
           title: '当前价',
-          key: 'role',
-          tooltip: true
-        },
-        {
-          title: '会员价',
-          key: 'role',
+          key: 'current_price',
           tooltip: true
         },
         {
           title: '审核时间',
-          key: 'role',
+          key: 'create_time',
           tooltip: true
         },
         {
@@ -123,50 +124,44 @@ export default {
           }
         }
       ],
-      data1: [
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        },
-        {
-          userName: 'name',
-          role: 'qiii'
-        }
-      ]
+      data1: []
     }
+  },
+  mounted () {
+    this.shopList()
   },
   methods: {
     changepage (index) {
       this.index = index
+      this.shopList()
       console.log(index)
+    },
+    shopList () {
+      this.$axios({
+        method: 'POST',
+        url: '/api/merchandise/commodity/getCommodity',
+        data: {
+          'id': null,
+          'name': null,
+          'cateName': null,
+          'brandName': null,
+          'startDate': null,
+          'endDate': null,
+          'is_effect': 1,
+          'currentPage': this.index,
+          'pageSize': this.pageSize
+        }
+      })
+        .then((res) => {
+          console.log(res.data)
+          this.loading = false
+          this.data1 = res.data.data.list
+          this.dataCount = res.data.data.totalCount
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$Message.error('接口报错')
+        })
     }
   }
 }

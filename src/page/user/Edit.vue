@@ -73,6 +73,7 @@ export default {
           brief: this.$store.state.abstract,
           description: this.$store.state.content,
           icon: this.$store.state.icon,
+          is_effect: 0,
           atlass: this.$store.state.imgList
         }
       })

@@ -13,6 +13,9 @@
       <FormItem :label="$t('shop.price')" v-show="show">
         <Input v-model="current" placeholder="请输入当前价"/>
       </FormItem>
+      <FormItem label="活动价" v-show="show">
+        <Input v-model="activityPrice" placeholder="请输入活动价"/>
+      </FormItem>
       <FormItem :label="$t('shop.sort')">
         <Select v-model="sort">
           <Option v-for='item in sortList' :key='item.id' :value="item.id">{{item.name}}</Option>
@@ -136,6 +139,14 @@ export default {
       },
       set (value) {
         this.$store.commit('current', value)
+      }
+    },
+    activityPrice: {
+      get () {
+        return this.$store.state.activityPrice
+      },
+      set (value) {
+        this.$store.commit('activityPrice', value)
       }
     },
     sort: {

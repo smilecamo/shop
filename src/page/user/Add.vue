@@ -57,6 +57,7 @@ export default {
           brand_id: this.$store.state.brand,
           supplier: this.$store.state.supplier,
           brief: this.$store.state.abstract,
+          is_effect: 0,
           description: this.$store.state.content,
           icon: this.$store.state.icon,
           atlass: this.$store.state.imgList

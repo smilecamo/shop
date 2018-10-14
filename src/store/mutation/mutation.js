@@ -11,6 +11,9 @@ export default {
   price (state, message) {
     state.price = message
   },
+  activityPrice (state, message) {
+    state.activityPrice = message
+  },
   show (state, message) {
     state.show = message
   },
