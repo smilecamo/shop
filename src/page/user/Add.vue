@@ -34,6 +34,59 @@ export default {
   },
   methods: {
     handle () {
+      let re = /^[0-9]+.?[0-9]*/
+      if (this.$store.state.name === '') {
+        this.$Message.error('名字不能为空')
+      } else if (!re.test(this.$store.state.price)) {
+        this.$Message.error('价格类必须是数字并且不能为空')
+      } else if (this.$store.state.sort === '') {
+        this.$Message.error('分类不能为空')
+      } else if (this.$store.state.brand === '') {
+        this.$Message.error('品牌不能为空')
+      } else if (this.$store.state.supplier === '') {
+        this.$Message.error('供应商不能为空')
+      } else if (this.$store.state.abstract === '') {
+        this.$Message.error('描述详情不能为空')
+      } else if (this.$store.state.content === '') {
+        this.$Message.error('描述详情不能为空')
+      } else if (this.$store.state.icon === '') {
+        this.$Message.error('图片不能为空')
+      } else if (this.$store.state.imgList.length <= 0) {
+        this.$Message.error('图集不能为空')
+      } else {
+        this.$axios({
+          method: 'POST',
+          url: 'http://47.100.31.2:8083/merchandise/commodity/addCommodity',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+          },
+          data: {
+            id: null,
+            name: this.$store.state.name,
+            origin_price: this.$store.state.price,
+            cate_id: this.$store.state.sort,
+            brand_id: this.$store.state.brand,
+            supplier: this.$store.state.supplier,
+            brief: this.$store.state.abstract,
+            is_effect: 0,
+            description: this.$store.state.content,
+            icon: this.$store.state.icon,
+            atlass: this.$store.state.imgList
+          }
+        })
+          .then((res) => {
+            if (res.data.code === 200) {
+              this.$Message.success('success')
+              this.$router.push({path: '/have'})
+            } else {
+              this.$Message.error('err')
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+            this.$Message.error('接口报错')
+          })
+      }
       console.log(this.$store.state.name)
       console.log(this.$store.state.price)
       console.log(this.$store.state.sort)
@@ -43,38 +96,6 @@ export default {
       console.log(this.$store.state.content)
       console.log(this.$store.state.file, this.$store.state.imgList)
       console.log(this.$store.state.imgList)
-      this.$axios({
-        method: 'POST',
-        url: '/api/merchandise/commodity/addCommodity',
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-        },
-        data: {
-          id: null,
-          name: this.$store.state.name,
-          origin_price: this.$store.state.price,
-          cate_id: this.$store.state.sort,
-          brand_id: this.$store.state.brand,
-          supplier: this.$store.state.supplier,
-          brief: this.$store.state.abstract,
-          is_effect: 0,
-          description: this.$store.state.content,
-          icon: this.$store.state.icon,
-          atlass: this.$store.state.imgList
-        }
-      })
-        .then((res) => {
-          if (res.data.code === 200) {
-            this.$Message.success('success')
-            this.$router.push({path: '/have'})
-          } else {
-            this.$Message.err('err')
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-          this.$Message.error('接口报错')
-        })
     }
   },
   data () {

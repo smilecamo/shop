@@ -56,7 +56,7 @@ export default {
         // this.$router.push('Account')
         this.$axios({
           method: 'POST',
-          url: '/api/merchandise/user/upUser',
+          url: 'http://47.100.31.2:8083/merchandise/user/upUser',
           data: {
             'id': null,
             'userName': this.name,

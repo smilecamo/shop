@@ -6,7 +6,7 @@ Vue.use(Router)
 
 export default new Router({
   routes,
-  mode: 'history',
+  // mode: 'history',
   fallback: true,
   // 滚动行为
   scrollBehavior (to, from, savedPosition) {

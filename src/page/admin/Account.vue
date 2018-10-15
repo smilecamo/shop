@@ -22,7 +22,7 @@
     type="error"
     class="left"
     @click='delUsers'
-    >Delete</Button>
+    >{{$t('header.del')}}</Button>
     </div>
     <BackTop />
   </div>
@@ -50,13 +50,13 @@ export default {
           align: 'center'
         },
         {
-          title: '账户名',
+          title: this.$t('admin.name'),
           key: 'userName',
           sortable: true,
           tooltip: true
         },
         {
-          title: '权限',
+          title: this.$t('admin.role'),
           key: 'role',
           sortable: true,
           tooltip: true,
@@ -72,7 +72,7 @@ export default {
           }
         },
         {
-          title: '操作',
+          title: this.$t('shop.action'),
           key: 'action',
           width: 150,
           align: 'center',
@@ -139,7 +139,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: '/api/merchandise/user/upUser',
+          url: 'http://47.100.31.2:8083/merchandise/user/upUser',
           data: {
             'id': null,
             'userName': this.name,
@@ -165,7 +165,7 @@ export default {
     userName () {
       this.$axios({
         method: 'GET',
-        url: `/api/merchandise/user/selUserName/${this.name}`
+        url: `http://47.100.31.2:8083/merchandise/user/selUserName/${this.name}`
       })
         .then((res) => {
           if (res.data.data === false) {
@@ -177,7 +177,7 @@ export default {
     roleList () {
       this.$axios({
         method: 'POST',
-        url: '/api/merchandise/user/selUserList',
+        url: 'http://47.100.31.2:8083/merchandise/user/selUserList',
         params: {
           currentPage: this.index,
           pageSize: 20
@@ -216,7 +216,7 @@ export default {
     delUser (val) {
       this.$axios({
         method: 'POST',
-        url: '/api/merchandise/user/delUser',
+        url: 'http://47.100.31.2:8083/merchandise/user/delUser',
         // headers: {
         //   'Content-Type': 'application/x-www-form-urlencoded'
         // },
@@ -241,7 +241,7 @@ export default {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         // responseType: 'json',
-        url: '/api/merchandise/user/delUsers',
+        url: 'http://47.100.31.2:8083/merchandise/user/delUsers',
         params: {
           'id': this.arr
         }

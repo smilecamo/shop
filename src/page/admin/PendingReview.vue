@@ -1,15 +1,17 @@
 <template>
   <div>
-    <span class="content-header">待审核页面</span>
+    <span class="content-header">{{$t('admin.pendingPage')}}</span>
     <Divider dashed />
     <Table
     border
     ref="selection"
     :loading="loading"
     :columns="brandHeader"
+    @on-selection-change="selection"
     :data="data1"
     ></Table>
     <div class="pages">
+    <Button @click="delShops">{{$t('header.del')}}</Button>
     <Page
     :total="dataCount"
     :page-size="pageSize"
@@ -34,28 +36,34 @@ export default {
       // 设置初始化信息数
       dataCount: 0,
       // 每页显示的数量
-      pageSize: 2,
+      pageSize: 20,
       // 设置表格头部
       brandHeader: [
         {
-          title: '商品名称',
+          type: 'selection',
+          width: 60,
+          key: 'id',
+          align: 'center'
+        },
+        {
+          title: this.$t('shop.name'),
           key: 'name',
           tooltip: true
         },
         {
-          title: '分类名称',
+          title: this.$t('shop.sort'),
           key: 'cate',
           sortable: true,
           tooltip: true
         },
         {
-          title: '品牌名称',
+          title: this.$t('shop.brand'),
           key: 'brand',
           sortable: true,
           tooltip: true
         },
         {
-          title: '供应商',
+          title: this.$t('shop.supplier'),
           key: 'supplier',
           tooltip: true,
           render: (h, params) => {
@@ -70,12 +78,12 @@ export default {
           }
         },
         {
-          title: '原价',
+          title: this.$t('shop.cost'),
           key: 'origin_price',
           tooltip: true
         },
         {
-          title: '操作',
+          title: this.$t('shop.action'),
           key: 'action',
           width: 150,
           align: 'center',
@@ -114,9 +122,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    // this.delUser(params.row.id)
-                    // this.$Message.success(params.row.id)
-                    this.$Message.success('success')
+                    this.delUser(params.row.id)
                   }
                 }
               }, '')
@@ -138,7 +144,7 @@ export default {
     shopList () {
       this.$axios({
         method: 'POST',
-        url: '/api/merchandise/commodity/getCommodity',
+        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
         data: {
           'id': null,
           'name': null,
@@ -160,6 +166,56 @@ export default {
         .catch((err) => {
           console.log(err)
           this.$Message.error('接口报错')
+        })
+    },
+    // 删除单个
+    delUser (id) {
+      this.$axios({
+        method: 'POST',
+        url: 'http://47.100.31.2:8083/merchandise/commodity/delCommodity',
+        params: {
+          id: id
+        }
+      })
+        .then((res) => {
+          if (res.data.data === null) {
+            this.$Message.success('success')
+            this.shopList()
+          } else {
+            this.$Message.error('error')
+          }
+        })
+    },
+    // 删除多个
+    // 选中的数据
+    selection (selection) {
+      let arr = []
+      for (let i = 0; i < selection.length; i++) {
+        console.log(selection[i].id)
+        arr.push(selection[i].id)
+      }
+      let tt = [...new Set(arr)]
+      this.arr = tt
+    },
+    // 删除多个商品
+    delShops () {
+      this.$axios({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        url: 'http://47.100.31.2:8083/merchandise/commodity/delCommoditys',
+        params: {
+          'id': this.arr
+        }
+      })
+        .then((res) => {
+          if (res.data.data === null) {
+            this.$Message.success('success')
+            this.shopList()
+          } else {
+            this.$Message.error('error')
+          }
         })
     }
   }

@@ -6,17 +6,21 @@ module.exports = {
     sort: 'Sort',
     cost: 'Cost Price',
     price: 'Current Price',
+    activity: 'Activity price',
     brand: 'Brand',
     supplier: 'Supplier',
     introduction: 'Introduction',
     details: 'Details',
     thumbnail: 'Thumbnail',
     action: 'Action',
-    edit: 'Edit'
+    edit: 'Edit',
+    atlas: 'Atlas',
+    time: 'Review time'
   },
   header: {
     quit: 'quit',
-    language: 'language'
+    language: 'language',
+    del: 'delete'
   },
   user: {
     management: 'Commodity management',
@@ -32,6 +36,10 @@ module.exports = {
     existing: 'Existing account',
     name: 'Name',
     password: 'Password',
-    role: 'role'
+    role: 'role',
+    passed: 'examination passed',
+    reviewPage: 'Commodity review page',
+    pendingPage: 'Pending review page',
+    ReviewedPage: 'Reviewed page'
   }
 }

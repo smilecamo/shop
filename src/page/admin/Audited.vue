@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="content-header">已审核页面</span>
+    <span class="content-header">{{$t('admin.ReviewedPage')}}</span>
     <Divider dashed />
     <Table
     border
@@ -35,22 +35,22 @@ export default {
       // 设置表格头部
       brandHeader: [
         {
-          title: '商品名称',
+          title: this.$t('shop.name'),
           key: 'name',
           tooltip: true
         },
         {
-          title: '分类名称',
+          title: this.$t('shop.sort'),
           key: 'cate',
           tooltip: true
         },
         {
-          title: '品牌名称',
+          title: this.$t('shop.brand'),
           key: 'brand',
           tooltip: true
         },
         {
-          title: '供应商',
+          title: this.$t('shop.supplier'),
           key: 'supplier',
           render: (h, params) => {
             let texts = ''
@@ -64,65 +64,78 @@ export default {
           }
         },
         {
-          title: '原价',
+          title: this.$t('shop.cost'),
           key: 'origin_price',
           tooltip: true
         },
         {
-          title: '当前价',
+          title: this.$t('shop.price'),
           key: 'current_price',
           tooltip: true
         },
         {
-          title: '审核时间',
+          title: this.$t('shop.time'),
           key: 'create_time',
-          tooltip: true
-        },
-        {
-          title: '操作',
-          key: 'action',
-          width: 150,
-          align: 'center',
+          tooltip: true,
           render: (h, params) => {
-            return h('div', [
-              h('Icon', {
-                props: {
-                  type: 'md-create'
-                },
-                style: {
-                  marginRight: '10px',
-                  fontSize: '24px',
-                  color: '#2d8cf0',
-                  padding: '0 10px',
-                  cursor: 'pointer'
-                },
-                on: {
-                  click: () => {
-                    this.$store.commit('show', true)
-                    this.$router.push({name: 'Review', params: { name: params.row }})
-                  }
-                }
-              }, ''),
-              h('Icon', {
-                props: {
-                  type: 'md-trash'
-                },
-                style: {
-                  marginRight: '5px',
-                  fontSize: '24px',
-                  color: 'red',
-                  padding: '0 5px',
-                  cursor: 'pointer'
-                },
-                on: {
-                  click: () => {
-                    this.$Message.success('success')
-                  }
-                }
-              }, '')
-            ])
+            let time = ''
+            let un = params.row.create_time
+            let date = new Date(un * 1000)
+            let year = date.getFullYear()
+            let month = date.getMonth() + 1
+            let day = date.getDate()
+            let hours = date.getHours() + ':'
+            let m = date.getMinutes()
+            time = year + '-' + month + '-' + day + ' ' + hours + m
+            return h('div', {
+            }, time)
           }
         }
+        // {
+        //   title: '操作',
+        //   key: 'action',
+        //   width: 150,
+        //   align: 'center',
+        //   render: (h, params) => {
+        //     return h('div', [
+        //       // h('Icon', {
+        //       //   props: {
+        //       //     type: 'md-create'
+        //       //   },
+        //       //   style: {
+        //       //     marginRight: '10px',
+        //       //     fontSize: '24px',
+        //       //     color: '#2d8cf0',
+        //       //     padding: '0 10px',
+        //       //     cursor: 'pointer'
+        //       //   },
+        //       //   on: {
+        //       //     click: () => {
+        //       //       this.$store.commit('show', true)
+        //       //       this.$router.push({name: 'Review', params: { name: params.row }})
+        //       //     }
+        //       //   }
+        //       // }, ''),
+        //       h('Icon', {
+        //         props: {
+        //           type: 'md-trash'
+        //         },
+        //         style: {
+        //           marginRight: '5px',
+        //           fontSize: '24px',
+        //           color: 'red',
+        //           padding: '0 5px',
+        //           cursor: 'pointer'
+        //         },
+        //         on: {
+        //           click: () => {
+        //             this.$Message.success('success')
+        //           }
+        //         }
+        //       }, '')
+        //     ])
+        //   }
+        // }
       ],
       data1: []
     }
@@ -139,7 +152,7 @@ export default {
     shopList () {
       this.$axios({
         method: 'POST',
-        url: '/api/merchandise/commodity/getCommodity',
+        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
         data: {
           'id': null,
           'name': null,

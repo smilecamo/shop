@@ -2,7 +2,7 @@
   <div class="add-content">
     <span class="content-header">
       <Icon type="ios-arrow-dropleft-circle" @click="back"/>
-      商品审核页
+      {{$t('admin.reviewPage')}}
     </span>
     <Divider dashed />
     <Edit></Edit>
@@ -11,11 +11,12 @@
       type="primary"
       style="width: 50%,margin: 0 auto"
       @click="handle"
-      >审核通过</Button>
-    <Button
+      >{{$t('admin.passed')}}</Button>
+    <!-- <Button
       type="error"
       style="width: 50%,margin: 0 auto"
-      >审核不通过</Button></div>
+      >审核不通过</Button> -->
+      </div>
   <router-view />
   </div>
 </template>
@@ -33,7 +34,7 @@ export default {
     shopDetail (id) {
       this.$axios({
         method: 'GET',
-        url: '/api/merchandise/commodity/quyCommodity',
+        url: 'http://47.100.31.2:8083/merchandise/commodity/quyCommodity',
         params: {
           'id': id
         }
@@ -63,41 +64,69 @@ export default {
         })
     },
     handle () {
-      this.$axios({
-        method: 'POST',
-        url: '/api/merchandise/commodity/upCommodity',
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-        },
-        data: {
-          id: this.$store.state.shopId,
-          name: this.$store.state.name,
-          activityName: this.$store.state.name1,
-          activityPrice: this.$store.state.activityPrice,
-          origin_price: this.$store.state.price,
-          current_price: this.$store.state.current,
-          cate_id: this.$store.state.sort,
-          brand_id: this.$store.state.brand,
-          supplier: this.$store.state.supplier,
-          brief: this.$store.state.abstract,
-          description: this.$store.state.content,
-          icon: this.$store.state.icon,
-          is_effect: 1,
-          atlass: this.$store.state.imgList
-        }
-      })
-        .then((res) => {
-          if (res.data.code === 200) {
-            this.$Message.success('success')
-            // this.$router.push({path: '/have'})
-          } else {
-            this.$Message.err('err')
+      let re = /^[0-9]+.?[0-9]*/
+      if (this.$store.state.name === '') {
+        this.$Message.error('名字不能为空')
+      } else if (this.$store.state.name1 === '' || null) {
+        this.$Message.error('名字类不能为空')
+      } else if (!re.test(this.$store.state.price)) {
+        this.$Message.error('价格类必须是数字并且不能为空')
+      } else if (!re.test(this.$store.state.activityPrice)) {
+        this.$Message.error('价格类必须是数字并且不能为空')
+      } else if (!re.test(this.$store.state.current)) {
+        this.$Message.error('价格类必须是数字并且不能为空')
+      } else if (this.$store.state.sort === '') {
+        this.$Message.error('分类不能为空')
+      } else if (this.$store.state.brand === '') {
+        this.$Message.error('品牌不能为空')
+      } else if (this.$store.state.supplier === '') {
+        this.$Message.error('供应商不能为空')
+      } else if (this.$store.state.abstract === '') {
+        this.$Message.error('描述详情不能为空')
+      } else if (this.$store.state.content === '') {
+        this.$Message.error('描述详情不能为空')
+      } else if (this.$store.state.icon === '') {
+        this.$Message.error('图片不能为空')
+      } else if (this.$store.state.imgList.length <= 0) {
+        this.$Message.error('图集不能为空')
+      } else {
+        this.$axios({
+          method: 'POST',
+          url: 'http://47.100.31.2:8083/merchandise/commodity/upCommodity',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+          },
+          data: {
+            id: this.$store.state.shopId,
+            name: this.$store.state.name,
+            activityName: this.$store.state.name1,
+            activityPrice: this.$store.state.activityPrice,
+            origin_price: this.$store.state.price,
+            current_price: this.$store.state.current,
+            cate_id: this.$store.state.sort,
+            brand_id: this.$store.state.brand,
+            supplier: this.$store.state.supplier,
+            brief: this.$store.state.abstract,
+            description: this.$store.state.content,
+            icon: this.$store.state.icon,
+            is_effect: 1,
+            sale_count: 0,
+            atlass: this.$store.state.imgList
           }
         })
-        .catch((err) => {
-          console.log(err)
-          this.$Message.err('接口报错')
-        })
+          .then((res) => {
+            if (res.data.code === 200) {
+              this.$Message.success('success')
+              this.$router.push({path: '/audited'})
+            } else {
+              this.$Message.error('err')
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+            this.$Message.error('err')
+          })
+      }
     },
     back () {
       this.$router.go(-1)

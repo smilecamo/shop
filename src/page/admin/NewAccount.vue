@@ -10,10 +10,10 @@
         @on-blur='userName'
         />
       </FormItem>
-      <FormItem label="密码">
+      <FormItem :label="$t('admin.password')">
         <Input v-model="password" placeholder="请输入密码" clearable/>
       </FormItem>
-      <FormItem label="权限">
+      <FormItem :label="$t('admin.role')">
           <Select v-model="Permission">
             <Option value="0">用户</Option>
             <Option value="1">管理员</Option>
@@ -24,7 +24,7 @@
         v-show="show"
         type="primary"
         @click="newAccount"
-        >新增账户</Button>
+        >{{$t('admin.add')}}</Button>
       </FormItem>
     </Form>
   </div>
@@ -44,7 +44,7 @@ export default {
     userName () {
       this.$axios({
         method: 'GET',
-        url: `/api/merchandise/user/selUserName/${this.name}`
+        url: `http://47.100.31.2:8083/merchandise/user/selUserName/${this.name}`
       })
         .then((res) => {
           if (res.data.data === true) {
@@ -63,7 +63,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: '/api/merchandise/user/addUser',
+          url: 'http://47.100.31.2:8083/merchandise/user/addUser',
           data: {
             'id': null,
             'userName': this.name,

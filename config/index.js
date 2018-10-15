@@ -10,14 +10,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
+      '/api/**': {
         // 源地址
         target: 'http://47.100.31.2:8083/',
+        // target: 'http://192.168.1.29:8080',
         // 改变源
         changeOrigin: true,
         // 目标地址
         pathRewrite: {
-          '^/api': ''
+          '^/api': '/'
         }
       }
     },

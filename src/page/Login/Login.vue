@@ -97,10 +97,11 @@ export default {
   methods: {
     // 判断用户名是否存在
     userName () {
-      this.$axios({
-        method: 'GET',
-        url: `/api/merchandise/user/selUserName/${this.resetUser}`
-      })
+      this.$axios(
+        {
+          method: 'GET',
+          url: `http://47.100.31.2:8083/merchandise/user/selUserName/${this.resetUser}`
+        })
         .then((res) => {
           if (res.data.data === false) {
             this.$Message.error('用户名不存在,请核对后重新输入')
@@ -111,7 +112,7 @@ export default {
     userPwd () {
       this.$axios({
         method: 'POST',
-        url: '/api/merchandise/user/selUser',
+        url: 'http://47.100.31.2:8083/merchandise/user/selUser',
         params: {
           name: this.resetUser,
           pwd: this.OldPassword
@@ -140,7 +141,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: '/api/merchandise/user/upUser',
+          url: 'http://47.100.31.2:8083/merchandise/user/upUser',
           data: {
             'id': null,
             'userName': this.resetUser,
@@ -164,7 +165,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: `/api/merchandise/adminLogin`,
+          url: `http://47.100.31.2:8083/merchandise/adminLogin`,
           params: {
             username: user,
             password: password

@@ -13,7 +13,7 @@
       <FormItem :label="$t('shop.price')" v-show="show">
         <Input v-model="current" placeholder="请输入当前价"/>
       </FormItem>
-      <FormItem label="活动价" v-show="show">
+      <FormItem :label="$t('shop.activity')" v-show="show">
         <Input v-model="activityPrice" placeholder="请输入活动价"/>
       </FormItem>
       <FormItem :label="$t('shop.sort')">
@@ -66,7 +66,7 @@
           </div>
         </Upload>
       </FormItem>
-      <FormItem label="图集">
+      <FormItem :label="$t('shop.atlas')">
         <div class="demo-upload-list" v-for="item in imgList" :key="item.img">
           <div>
             <img :src="item.img">
@@ -230,7 +230,7 @@ export default {
   mounted () {
     this.$axios({
       method: 'GET',
-      url: '/api/merchandise/sort/list'
+      url: 'http://47.100.31.2:8083/merchandise/sort/list'
     })
       .then((res) => {
         this.sortList = res.data.data
@@ -240,7 +240,7 @@ export default {
       })
     this.$axios({
       method: 'GET',
-      url: '/api/merchandise/brand/list'
+      url: 'http://47.100.31.2:8083/merchandise/brand/list'
     })
       .then((res) => {
         this.brandList = res.data.data
@@ -253,19 +253,18 @@ export default {
     // *********多张
     // 移除当前图片
     handleRemove (file) {
-      console.log(file)
       this.$axios({
         method: 'POST',
-        url: '/api/merchandise/atlas/delAtlas',
+        url: 'http://47.100.31.2:8083/merchandise/atlas/delAtlas',
         params: {
           'id': file
         }
       })
         .then((res) => {
-          alert(res)
+          this.$Message.success('success')
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          this.$Message.error('error')
         })
     },
     // 上传之前判断是否大于定义的数量
