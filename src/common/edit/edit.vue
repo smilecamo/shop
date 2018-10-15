@@ -269,20 +269,27 @@ export default {
     // *********多张
     // 移除当前图片
     handleRemove (file) {
-      this.$axios({
-        method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/atlas/delAtlas',
-        params: {
-          'id': file
-        }
-      })
-        .then((res) => {
-          this.ShopImgLists()
-          this.$Message.success('success')
+      // 判断是否存在与服务器如果没存就前端清空
+      if (file === null) {
+        this.imgLists = []
+        this.$store.commit('imgList', [])
+      } else {
+        // 否则删除服务器端的图片
+        this.$axios({
+          method: 'POST',
+          url: 'http://47.100.31.2:8083/merchandise/atlas/delAtlas',
+          params: {
+            'id': file
+          }
         })
-        .catch(() => {
-          this.$Message.error('error')
-        })
+          .then((res) => {
+            this.ShopImgLists()
+            this.$Message.success('success')
+          })
+          .catch(() => {
+            this.$Message.error('error')
+          })
+      }
     },
     // 上传之前判断是否大于定义的数量
     uploadBefore () {
@@ -298,6 +305,7 @@ export default {
       this.imgLists.push({id: null, deal_id: null, sort: null, img: file.data})
       console.log(this.imgLists)
       this.$store.commit('imgList', this.imgLists)
+      // this.ShopImgLists()
     },
     uploadError () {
       this.$Message.error('上传失败')
