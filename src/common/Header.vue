@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="connet">
-        XX购物商场
+        1000.la购物平台管理
       <div class="Setting">
       <Form :label-width="80" width='320' inline>
       <FormItem :label="$t('header.language')" style="margin-top: 14px">

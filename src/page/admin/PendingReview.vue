@@ -2,6 +2,10 @@
   <div>
     <span class="content-header">{{$t('admin.pendingPage')}}</span>
     <Divider dashed />
+    <div>
+    <Input @on-search='searchName'  suffix="ios-search" search placeholder="商品名称" style="width: auto" />
+    <Input @on-search='searchSort' suffix="ios-search" search placeholder="商品分类" style="width: auto" />
+    </div>
     <Table
     border
     ref="selection"
@@ -137,6 +141,61 @@ export default {
     this.shopList()
   },
   methods: {
+    // 按照商品名查询
+    searchName (val) {
+      this.$axios({
+        method: 'POST',
+        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
+        data: {
+          'id': null,
+          'name': val,
+          'cateName': null,
+          'brandName': null,
+          'startDate': null,
+          'endDate': null,
+          'is_effect': 0,
+          'currentPage': this.index,
+          'pageSize': this.pageSize
+        }
+      })
+        .then((res) => {
+          console.log(res.data)
+          this.loading = false
+          this.data1 = res.data.data.list
+          this.dataCount = res.data.data.totalCount
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$Message.error('接口报错')
+        })
+    },
+    // 按照分类查询
+    searchSort (val) {
+      this.$axios({
+        method: 'POST',
+        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
+        data: {
+          'id': null,
+          'name': null,
+          'cateName': val,
+          'brandName': null,
+          'startDate': null,
+          'endDate': null,
+          'is_effect': 0,
+          'currentPage': this.index,
+          'pageSize': this.pageSize
+        }
+      })
+        .then((res) => {
+          this.loading = false
+          this.data1 = res.data.data.list
+          this.dataCount = res.data.data.totalCount
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$Message.error('接口报错')
+        })
+    },
     changepage (index) {
       this.index = index
       this.shopList()

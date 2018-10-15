@@ -250,6 +250,22 @@ export default {
       })
   },
   methods: {
+    // 图集列表this.$store.state.shopId
+    ShopImgLists () {
+      this.$axios({
+        method: 'GET',
+        url: 'http://47.100.31.2:8083/merchandise/atlas/getAtlas',
+        params: {
+          'deal_id': this.$store.state.shopId
+        }
+      })
+        .then((res) => {
+          this.$store.commit('imgList', res.data.data)
+        })
+        .catch(() => {
+          this.$Message.error('error')
+        })
+    },
     // *********多张
     // 移除当前图片
     handleRemove (file) {
@@ -261,6 +277,7 @@ export default {
         }
       })
         .then((res) => {
+          this.ShopImgLists()
           this.$Message.success('success')
         })
         .catch(() => {
