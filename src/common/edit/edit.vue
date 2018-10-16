@@ -5,7 +5,7 @@
         <Input v-model="name" placeholder="请输入商品名称"/>
       </FormItem>
       <FormItem :label="$t('shop.name1')" v-show="show">
-        <Input v-model="name1" placeholder="请输入商品名称"/>
+        <Input v-model="shopName1" placeholder="请输入商品名称"/>
       </FormItem>
       <FormItem :label="$t('shop.cost')">
         <Input v-model="price" placeholder="请输入成本价"/>
@@ -104,6 +104,9 @@ export default {
     quillEditor
   },
   computed: {
+    shopName1: function () {
+      return '_' + this.$store.state.name
+    },
     name: {
       get () {
         return this.$store.state.name
