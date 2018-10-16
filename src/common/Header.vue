@@ -2,10 +2,10 @@
   <div>
     <header>
       <div class="connet">
-        1000.la购物平台管理
+        1000.la management
       <div class="Setting">
       <Form :label-width="80" width='320' inline>
-      <FormItem :label="$t('header.language')" style="margin-top: 14px">
+      <FormItem label="language" style="margin-top: 14px">
         <Select v-model="language" style="width:100px" @on-change='changeLang'>
           <Option value="en-US">en-US</Option>
           <Option value="zh-CN">zh-CN</Option>
