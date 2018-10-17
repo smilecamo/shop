@@ -32,7 +32,7 @@
       <router-view/>
       </Col>
     </Row>
-    <footer-tab class="footer"/>
+    <!-- <footer-tab class="footer"/> -->
   </div>
 </template>
 

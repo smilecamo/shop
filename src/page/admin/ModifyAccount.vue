@@ -1,19 +1,19 @@
 <template>
   <div>
-    <span class="content-header">修改账户</span>
+    <span class="content-header">{{$t('admin.Modify')}}</span>
     <Divider dashed />
     <Form :label-width="80">
-      <FormItem label="用户名">
+      <FormItem :label="$t('admin.name')">
         <Input v-model="name"
         disabled
-        placeholder="请输入用户名"
+        :placeholder="$t('please.username')"
         clearable/>
       </FormItem>
-      <FormItem label="密码">
-        <Input v-model="password" placeholder="请输入密码" clearable/>
+      <FormItem :label="$t('admin.password')">
+        <Input v-model="password" :placeholder="$t('please.password')" clearable/>
       </FormItem>
-        <FormItem label="权限">
-          <Select v-model="role">
+        <FormItem :label="$t('admin.role')">
+          <Select v-model="role" :label="$t('please.choose')">
             <Option value="0">用户</Option>
             <Option value="1">管理员</Option>
           </Select>
@@ -23,7 +23,7 @@
         type="primary"
         @click="modeifyAccount"
         >
-        修改账户</Button>
+        {{$t('admin.Modify')}}</Button>
       </FormItem>
     </Form>
   </div>
@@ -50,7 +50,7 @@ export default {
       let name = this.name
       let password = this.password
       if (name === '' || password === '') {
-        this.$Message.error('请输入用户名或密码')
+        this.$Message.error(this.$t('err.password'))
       } else {
         console.log(this.role, this.password, this.id)
         // this.$router.push('Account')

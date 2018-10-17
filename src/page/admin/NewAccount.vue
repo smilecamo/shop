@@ -5,16 +5,16 @@
     <Form :label-width="80">
       <FormItem :label="$t('admin.name')">
         <Input v-model="name"
-        placeholder="请输入用户名"
+        :placeholder="$t('please.username')"
         clearable
         @on-blur='userName'
         />
       </FormItem>
       <FormItem :label="$t('admin.password')">
-        <Input v-model="password" placeholder="请输入密码" clearable/>
+        <Input v-model="password" :placeholder="$t('please.password')" clearable/>
       </FormItem>
       <FormItem :label="$t('admin.role')">
-          <Select v-model="Permission">
+          <Select v-model="Permission" :label="$t('please.choose')">
             <Option value="0">用户</Option>
             <Option value="1">管理员</Option>
           </Select>
@@ -48,7 +48,7 @@ export default {
       })
         .then((res) => {
           if (res.data.data === true) {
-            this.$Message.error('用户名已存在,请核对后重新输入')
+            this.$Message.error(this.$t('err.username1'))
             this.show = false
           } else {
             this.show = true
@@ -59,7 +59,7 @@ export default {
       let name = this.name
       let password = this.password
       if (name === '' || password === '') {
-        this.$Message.error('请输入用户名或密码')
+        this.$Message.error(this.$t('err.password'))
       } else {
         this.$axios({
           method: 'POST',

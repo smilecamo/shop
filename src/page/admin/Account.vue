@@ -135,7 +135,7 @@ export default {
     // 弹出框确认按钮
     ok () {
       if (this.name === '' || this.password === '') {
-        this.$Message.error('请输入用户名或密码')
+        this.$Message.error(this.$t('err.password'))
       } else {
         this.$axios({
           method: 'POST',
@@ -169,7 +169,7 @@ export default {
       })
         .then((res) => {
           if (res.data.data === false) {
-            this.$Message.error('用户名不存在,请核对后重新输入')
+            this.$Message.error(this.$t('err.userName'))
           }
         })
     },

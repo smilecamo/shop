@@ -104,7 +104,7 @@ export default {
         })
         .then((res) => {
           if (res.data.data === false) {
-            this.$Message.error('用户名不存在,请核对后重新输入')
+            this.$Message.error(this.$t('err.userName'))
           }
         })
     },
@@ -121,23 +121,23 @@ export default {
         .then((res) => {
           if (res.data.data === false) {
             this.shows = false
-            this.$Message.error('用户名与密码不符合,请核对后重新输入')
+            this.$Message.error(this.$t('err.NoUserName'))
           } else if (res.data.data === true) {
             this.shows = true
           } else {
-            this.$Message.error('未知问题')
+            this.$Message.error('err')
             this.shows = false
           }
         })
         .catch((err) => {
           console.log(err)
-          this.$Message.error('接口报错')
+          this.$Message.error('err')
         })
     },
     // 修改密码
     resetPwd () {
       if (this.resetUser === '' || this.OldPassword === '' || this.NewPassword === '') {
-        this.$Message.error('请输入用户名或密码')
+        this.$Message.error(this.$t('err.password'))
       } else {
         this.$axios({
           method: 'POST',
@@ -161,7 +161,7 @@ export default {
       let user = this.user
       let password = this.password
       if (user === '' || password === '') {
-        this.$Message.error('请输入用户名或密码')
+        this.$Message.error(this.$t('err.password'))
       } else {
         this.$axios({
           method: 'POST',
@@ -187,12 +187,12 @@ export default {
               sessionStorage.setItem('role', JSON.stringify(users))
               this.$router.push('add')
             } else {
-              this.$Message.error('登录名或密码错误')
+              this.$Message.error(this.$t('err.login'))
             }
           })
           .catch((err) => {
             console.log(err)
-            this.$Message.error('失败')
+            this.$Message.error('err')
           })
       }
     }

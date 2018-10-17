@@ -22,6 +22,32 @@ module.exports = {
     language: '语言',
     del: '删除'
   },
+  please: {
+    name: '请输入商品名称',
+    shopName: '请输入活动商品名称',
+    price: '请输入成本价',
+    current: '请输入当前价',
+    activity: '请输入活动价',
+    choose: '请选择',
+    username: '请输入用户名',
+    password: '请输入密码'
+  },
+  err: {
+    name: '商品名称不能为空',
+    price: '价格类必须是数字并且不能为空',
+    sort: '分类不能为空',
+    brand: '品牌不能为空',
+    supplier: '供应商不能为空',
+    Description: '描述详情不能为空',
+    empty: '描述详情不能为空',
+    img: '图片不能为空',
+    imgList: '图集不能为空',
+    userName: '用户名不存在,请核对后重新输入',
+    userName1: '用户名已存在,请核对后重新输入',
+    NoUserName: '用户名与密码不符合,请核对后重新输入',
+    password: '请输入用户名或密码',
+    login: '登录名或密码错误'
+  },
   user: {
     management: '商品管理',
     add: '新增商品',
@@ -40,6 +66,7 @@ module.exports = {
     passed: '审核通过',
     reviewPage: '商品审核页',
     pendingPage: '待审核页面',
-    ReviewedPage: '已审核页面'
+    ReviewedPage: '已审核页面',
+    Modify: '修改账户'
   }
 }

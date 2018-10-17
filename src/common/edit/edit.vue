@@ -2,32 +2,32 @@
   <div>
     <Form :label-width="80" width='320'>
       <FormItem :label="$t('shop.name')">
-        <Input v-model="name" placeholder="请输入商品名称"/>
+        <Input v-model="name" :placeholder="$t('please.name')"/>
       </FormItem>
       <FormItem :label="$t('shop.name1')" v-show="show">
-        <Input v-model="shopName1" placeholder="请输入商品名称"/>
+        <Input v-model="shopName1" :placeholder="$t('please.name')"/>
       </FormItem>
       <FormItem :label="$t('shop.cost')">
-        <Input v-model="price" placeholder="请输入成本价"/>
+        <Input v-model="price" :placeholder="$t('please.price')"/>
       </FormItem>
       <FormItem :label="$t('shop.price')" v-show="show">
-        <Input v-model="current" placeholder="请输入当前价"/>
+        <Input v-model="current" :placeholder="$t('please.current')"/>
       </FormItem>
       <FormItem :label="$t('shop.activity')" v-show="show">
-        <Input v-model="activityPrice" placeholder="请输入活动价"/>
+        <Input v-model="activityPrice" :placeholder="$t('please.activity')"/>
       </FormItem>
       <FormItem :label="$t('shop.sort')">
-        <Select v-model="sort">
+        <Select v-model="sort" :label="$t('please.choose')">
           <Option v-for='item in sortList' :key='item.id' :value="item.id">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.brand')">
-        <Select v-model="brand">
+        <Select v-model="brand" :label="$t('please.choose')">
           <Option v-for='item in brandList' :key='item.id' :value="item.id">{{item.name}}</Option>
         </Select>
       </FormItem>
       <FormItem :label="$t('shop.supplier')">
-        <Select v-model="supplier">
+        <Select v-model="supplier" :label="$t('please.choose')">
           <Option v-for='item in supplierList' :key='item.id' :value="item.id">{{item.name}}</Option>
         </Select>
       </FormItem>

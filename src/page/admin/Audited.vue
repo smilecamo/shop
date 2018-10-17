@@ -173,7 +173,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
-          this.$Message.error('接口报错')
+          this.$Message.error('err')
         })
     }
   }

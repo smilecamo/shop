@@ -3,8 +3,8 @@
     <span class="content-header">{{$t('admin.pendingPage')}}</span>
     <Divider dashed />
     <div>
-    <Input @on-search='searchName'  suffix="ios-search" search placeholder="商品名称" style="width: auto" />
-    <Input @on-search='searchSort' suffix="ios-search" search placeholder="商品分类" style="width: auto" />
+    <Input @on-search='searchName'  suffix="ios-search" search :placeholder="$t('shop.name')" style="width: auto" />
+    <Input @on-search='searchSort' suffix="ios-search" search :placeholder="$t('shop.sort')" style="width: auto" />
     </div>
     <Table
     border
@@ -166,7 +166,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
-          this.$Message.error('接口报错')
+          this.$Message.error('err')
         })
     },
     // 按照分类查询
@@ -193,7 +193,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
-          this.$Message.error('接口报错')
+          this.$Message.error('err')
         })
     },
     changepage (index) {
@@ -224,7 +224,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
-          this.$Message.error('接口报错')
+          this.$Message.error('err')
         })
     },
     // 删除单个
