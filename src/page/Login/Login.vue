@@ -105,6 +105,7 @@ export default {
         .then((res) => {
           if (res.data.data === false) {
             this.$Message.error(this.$t('err.userName'))
+            this.shows = false
           }
         })
     },
