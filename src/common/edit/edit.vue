@@ -355,12 +355,12 @@ export default {
         'Access-Control-Allow-Origin': '*'
       },
       // 图片类型限制
-      Accept: '.jpg, .png,.jpeg',
+      Accept: '.jpg, .png, .jpeg',
       // 文本编辑器设置
       editorOption: {
         modules: {
           toolbar: [
-            ['bold', 'italic', 'underline', 'strike', 'blockquote', 'image', 'clean'],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote', 'clean'],
             [{'list': 'ordered'}, { 'list': 'bullet' }],
             [{'indent': '-1'}, { 'indent': '+1' }],
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
