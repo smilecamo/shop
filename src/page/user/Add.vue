@@ -56,7 +56,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: 'http://47.100.31.2:8083/merchandise/commodity/addCommodity',
+          url: '/merchandise/commodity/addCommodity',
           headers: {
             'Content-Type': 'application/json;charset=UTF-8'
           },

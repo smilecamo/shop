@@ -136,7 +136,7 @@ export default {
     list () {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
+        url: '/merchandise/commodity/getCommodity',
         data: {
           'id': null,
           'name': null,
@@ -166,7 +166,7 @@ export default {
     delShop (id) {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/delCommodity',
+        url: '/merchandise/commodity/delCommodity',
         params: {
           id: id
         }
@@ -201,7 +201,7 @@ export default {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8'
         },
-        url: 'http://47.100.31.2:8083/merchandise/commodity/delCommoditys',
+        url: '/merchandise/commodity/delCommoditys',
         params: {
           'id': this.arr
         }

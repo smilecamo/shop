@@ -44,7 +44,7 @@ export default {
     userName () {
       this.$axios({
         method: 'GET',
-        url: `http://47.100.31.2:8083/merchandise/user/selUserName/${this.name}`
+        url: `/merchandise/user/selUserName/${this.name}`
       })
         .then((res) => {
           if (res.data.data === true) {
@@ -63,7 +63,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: 'http://47.100.31.2:8083/merchandise/user/addUser',
+          url: '/merchandise/user/addUser',
           data: {
             'id': null,
             'userName': this.name,

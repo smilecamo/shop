@@ -50,7 +50,7 @@
         <Upload
           name="uploadFile"
           ref="upload"
-          action="http://47.100.31.2:8083/merchandise/uploadPicture/upload"
+          action="/merchandise/uploadPicture/upload"
           :header="headers"
           :show-upload-list="false"
           :default-file-list="thumbnail"
@@ -78,7 +78,7 @@
         <Upload
           name="uploadFile"
           ref="upload"
-          action="http://47.100.31.2:8083/merchandise/uploadPicture/upload"
+          action="/merchandise/uploadPicture/upload"
           :show-upload-list="false"
           :default-file-list="imgList"
           :before-upload = 'uploadBefore'
@@ -233,7 +233,7 @@ export default {
   mounted () {
     this.$axios({
       method: 'GET',
-      url: 'http://47.100.31.2:8083/merchandise/sort/list'
+      url: '/merchandise/sort/list'
     })
       .then((res) => {
         this.sortList = res.data.data
@@ -243,7 +243,7 @@ export default {
       })
     this.$axios({
       method: 'GET',
-      url: 'http://47.100.31.2:8083/merchandise/brand/list'
+      url: '/merchandise/brand/list'
     })
       .then((res) => {
         this.brandList = res.data.data
@@ -257,7 +257,7 @@ export default {
     ShopImgLists () {
       this.$axios({
         method: 'GET',
-        url: 'http://47.100.31.2:8083/merchandise/atlas/getAtlas',
+        url: '/merchandise/atlas/getAtlas',
         params: {
           'deal_id': this.$store.state.shopId
         }
@@ -280,7 +280,7 @@ export default {
         // 否则删除服务器端的图片
         this.$axios({
           method: 'POST',
-          url: 'http://47.100.31.2:8083/merchandise/atlas/delAtlas',
+          url: '/merchandise/atlas/delAtlas',
           params: {
             'id': file
           }

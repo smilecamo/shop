@@ -145,7 +145,7 @@ export default {
     searchName (val) {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
+        url: '/merchandise/commodity/getCommodity',
         data: {
           'id': null,
           'name': val,
@@ -173,7 +173,7 @@ export default {
     searchSort (val) {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
+        url: '/merchandise/commodity/getCommodity',
         data: {
           'id': null,
           'name': null,
@@ -203,7 +203,7 @@ export default {
     shopList () {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
+        url: '/merchandise/commodity/getCommodity',
         data: {
           'id': null,
           'name': null,
@@ -231,7 +231,7 @@ export default {
     delUser (id) {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/delCommodity',
+        url: '/merchandise/commodity/delCommodity',
         params: {
           id: id
         }
@@ -263,7 +263,7 @@ export default {
         headers: {
           'Content-Type': 'application/json;charset=UTF-8'
         },
-        url: 'http://47.100.31.2:8083/merchandise/commodity/delCommoditys',
+        url: '/merchandise/commodity/delCommoditys',
         params: {
           'id': this.arr
         }

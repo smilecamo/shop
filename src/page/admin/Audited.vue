@@ -152,7 +152,7 @@ export default {
     shopList () {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/getCommodity',
+        url: '/merchandise/commodity/getCommodity',
         data: {
           'id': null,
           'name': null,

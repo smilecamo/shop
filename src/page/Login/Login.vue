@@ -100,7 +100,7 @@ export default {
       this.$axios(
         {
           method: 'GET',
-          url: `http://47.100.31.2:8083/merchandise/user/selUserName/${this.resetUser}`
+          url: `/merchandise/user/selUserName/${this.resetUser}`
         })
         .then((res) => {
           if (res.data.data === false) {
@@ -113,7 +113,7 @@ export default {
     userPwd () {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/user/selUser',
+        url: '/merchandise/user/selUser',
         params: {
           name: this.resetUser,
           pwd: this.OldPassword
@@ -142,7 +142,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: 'http://47.100.31.2:8083/merchandise/user/upUser',
+          url: '/merchandise/user/upUser',
           data: {
             'id': null,
             'userName': this.resetUser,
@@ -166,7 +166,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: `http://47.100.31.2:8083/merchandise/adminLogin`,
+          url: `/merchandise/adminLogin`,
           params: {
             username: user,
             password: password

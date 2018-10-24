@@ -139,7 +139,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: 'http://47.100.31.2:8083/merchandise/user/upUser',
+          url: '/merchandise/user/upUser',
           data: {
             'id': null,
             'userName': this.name,
@@ -165,7 +165,7 @@ export default {
     userName () {
       this.$axios({
         method: 'GET',
-        url: `http://47.100.31.2:8083/merchandise/user/selUserName/${this.name}`
+        url: `/merchandise/user/selUserName/${this.name}`
       })
         .then((res) => {
           if (res.data.data === false) {
@@ -177,7 +177,7 @@ export default {
     roleList () {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/user/selUserList',
+        url: '/merchandise/user/selUserList',
         params: {
           currentPage: this.index,
           pageSize: 20
@@ -216,7 +216,7 @@ export default {
     delUser (val) {
       this.$axios({
         method: 'POST',
-        url: 'http://47.100.31.2:8083/merchandise/user/delUser',
+        url: '/merchandise/user/delUser',
         // headers: {
         //   'Content-Type': 'application/x-www-form-urlencoded'
         // },
@@ -241,7 +241,7 @@ export default {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         // responseType: 'json',
-        url: 'http://47.100.31.2:8083/merchandise/user/delUsers',
+        url: '/merchandise/user/delUsers',
         params: {
           'id': this.arr
         }

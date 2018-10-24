@@ -34,7 +34,7 @@ export default {
     shopDetail (id) {
       this.$axios({
         method: 'GET',
-        url: 'http://47.100.31.2:8083/merchandise/commodity/quyCommodity',
+        url: '/merchandise/commodity/quyCommodity',
         params: {
           'id': id
         }
@@ -92,7 +92,7 @@ export default {
       } else {
         this.$axios({
           method: 'POST',
-          url: 'http://47.100.31.2:8083/merchandise/commodity/upCommodity',
+          url: '/merchandise/commodity/upCommodity',
           headers: {
             'Content-Type': 'application/json;charset=UTF-8'
           },
